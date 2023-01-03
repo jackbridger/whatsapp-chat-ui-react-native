@@ -1,4 +1,6 @@
 import { View,Text,ScrollView } from "react-native";
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+
 import { useRef } from 'react';
 
 import messages from "../data/messages";
@@ -63,24 +65,38 @@ function OtherMessageBubble(props:MessageData) {
   return (
     <View style={{
       backgroundColor:'#fcfcfc',
-      width:"70%",
+      width:"65%",
       alignSelf:'flex-start',
       marginVertical:3,
       marginHorizontal:16,
-      padding:10,
+      paddingVertical:10,
+      paddingHorizontal:5,
       flexDirection:'row',
       borderRadius:5,
       borderColor:'grey',
-      borderWidth:0.2
+      borderWidth:0.2,
+      alignItems:'stretch',
+      alignContent:'space-between'
+
     }}>
       <Text style={{
         fontSize:16,
         width:"70%",
       }}>{message.text}</Text>
-      <Text style={{
-        fontSize:12,
-        color:'grey'
-      }}>{message.time}</Text>
+      <View style={{
+        flexDirection:'row',
+        alignContent:'flex-end',
+        justifyContent:'space-between',
+        width:'30%',
+      }}>
+        <Text style={{
+          fontSize:12,
+          color:'grey'
+        }}>{message.time}</Text>
+        <View style={{}}>
+          <MaterialCommunityIcons name="read" size={16} color="#5bb6c9" />
+        </View>
+      </View>
     </View>
   )
 }
