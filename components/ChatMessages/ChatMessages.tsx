@@ -4,6 +4,7 @@ import { useRef } from "react";
 
 import messages from "../../data/messages";
 import styles from "./ChatMessages.styles";
+import { MessageData } from "../../types";
 
 export default function ChatMessages() {
   const scrollViewRef = useRef<ScrollView>(null);
@@ -26,14 +27,6 @@ export default function ChatMessages() {
     </ScrollView>
   );
 }
-interface MessageData {
-  message: Message;
-}
-type Message = {
-  text: string;
-  time: string;
-  userID: number;
-};
 
 function MessageBubble(props: MessageData) {
   const { message } = props;
