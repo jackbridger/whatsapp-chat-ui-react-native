@@ -2,9 +2,11 @@ import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRef } from "react";
 
-import messages from "../../data/messages";
+import allConversations from "../../data/messages";
 import styles from "./ChatMessages.styles";
 import { MessageData } from "../../types";
+
+const messages = allConversations[0].messages;
 
 export default function ChatMessages() {
   const scrollViewRef = useRef<ScrollView>(null);
