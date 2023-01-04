@@ -1,7 +1,7 @@
-import { View,Text,ScrollView } from "react-native";
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { View, Text, ScrollView } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { useRef } from 'react';
+import { useRef } from "react";
 
 import messages from "../data/messages";
 
@@ -9,94 +9,111 @@ export default function ChatMessages() {
   const scrollViewRef = useRef<ScrollView>(null);
 
   return (
-    <ScrollView 
+    <ScrollView
       ref={scrollViewRef}
-      onContentSizeChange={() => {scrollViewRef.current?.scrollToEnd()}}
-    style={{height:"88%"}}>
-        {messages.map(message => message.userID === 1 ? (<MyMessageBubble message={message} />) : <OtherMessageBubble message={message} />)}
+      onContentSizeChange={() => {
+        scrollViewRef.current?.scrollToEnd();
+      }}
+      style={{ height: "88%" }}
+    >
+      {messages.map((message) =>
+        message.userID === 1 ? (
+          <MessageBubble message={message} />
+        ) : (
+          <MessageBubble message={message} />
+        )
+      )}
     </ScrollView>
   );
 }
-
-// function scrollViewSizeChanged(height:number, Ref:React.MutableRefObject<null>){
-//   // y since we want to scroll vertically, use x and the width-value if you want to scroll horizontally
-//   Ref.current
-// }
-
 interface MessageData {
-  message:Message
+  message: Message;
 }
 type Message = {
-  text:string;
-  time:string;
-  userID:number;
-}
+  text: string;
+  time: string;
+  userID: number;
+};
 
-function MyMessageBubble(props:MessageData) {
-  const {message} = props
+function MessageBubble(props: MessageData) {
+  const { message } = props;
+  const isMyMessage = message.userID === 1;
+  const isMessageRead = false;
   return (
-    <View style={{
-      backgroundColor:'#dfffc7',
-      width:"70%",
-      alignSelf:'flex-end',
-      marginVertical:3,
-      marginHorizontal:16,
-      padding:10,
-      flexDirection:'row',
-      borderRadius:5,
-      borderColor:'grey',
-      borderWidth:0.2
-    }}>
-      <Text style={{
-        fontSize:16,
-        width:"70%",
-      }}>{message.text}</Text>
-      <Text style={{
-        fontSize:12,
-        color:'grey'
-      }}>{message.time}</Text>
-    </View>
-  )
-}
-
-
-function OtherMessageBubble(props:MessageData) {
-  const {message} = props
-  return (
-    <View style={{
-      backgroundColor:'#fcfcfc',
-      width:"65%",
-      alignSelf:'flex-start',
-      marginVertical:3,
-      marginHorizontal:16,
-      paddingVertical:10,
-      paddingHorizontal:5,
-      flexDirection:'row',
-      borderRadius:5,
-      borderColor:'grey',
-      borderWidth:0.2,
-      alignItems:'stretch',
-      alignContent:'space-between'
-
-    }}>
-      <Text style={{
-        fontSize:16,
-        width:"70%",
-      }}>{message.text}</Text>
-      <View style={{
-        flexDirection:'row',
-        alignContent:'flex-end',
-        justifyContent:'space-between',
-        width:'30%',
-      }}>
-        <Text style={{
-          fontSize:12,
-          color:'grey'
-        }}>{message.time}</Text>
+    <View
+      style={{
+        backgroundColor: isMyMessage ? "#fcfcfc" : "#dfffc7",
+        width: "65%",
+        alignSelf: isMyMessage ? "flex-start" : "flex-end",
+        marginVertical: 3,
+        marginHorizontal: 16,
+        paddingVertical: 10,
+        flexDirection: "row",
+        borderRadius: 5,
+        borderTopLeftRadius: isMyMessage ? 0 : 5,
+        borderTopRightRadius: isMyMessage ? 5 : 0,
+      }}
+    >
+      <View
+        style={{
+          height: 0,
+          width: 0,
+          borderLeftWidth: 10,
+          borderLeftColor: "transparent",
+          borderTopColor: "white",
+          borderTopWidth: 10,
+          alignSelf: "flex-start",
+          borderRightColor: "black",
+          right: 10,
+          bottom: 10,
+          display: isMyMessage ? "flex" : "none",
+        }}
+      ></View>
+      <Text
+        style={{
+          fontSize: 16,
+          width: "65%",
+          left: isMyMessage ? 0 : 10,
+        }}
+      >
+        {message.text}
+      </Text>
+      <View
+        style={{
+          flexDirection: "row",
+          left: isMyMessage ? 0 : 10,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 12,
+            color: "grey",
+          }}
+        >
+          {message.time}
+        </Text>
         <View style={{}}>
-          <MaterialCommunityIcons name="read" size={16} color="#5bb6c9" />
+          {isMessageRead ? (
+            <MaterialCommunityIcons name="read" size={16} color="#5bb6c9" />
+          ) : (
+            <MaterialCommunityIcons name="check" size={16} color="grey" />
+          )}
         </View>
+        <View
+          style={{
+            height: 0,
+            width: 0,
+            borderRightWidth: 10,
+            borderRightColor: "transparent",
+            borderTopColor: "#dfffc7",
+            borderTopWidth: 10,
+            alignSelf: "flex-start",
+            left: 9,
+            bottom: 10,
+            display: isMyMessage ? "none" : "flex",
+          }}
+        ></View>
       </View>
     </View>
-  )
+  );
 }
