@@ -1,9 +1,9 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
 import { useRef } from "react";
 
-import messages from "../data/messages";
+import messages from "../../data/messages";
+import styles from "./ChatMessages.styles";
 
 export default function ChatMessages() {
   const scrollViewRef = useRef<ScrollView>(null);
@@ -14,7 +14,7 @@ export default function ChatMessages() {
       onContentSizeChange={() => {
         scrollViewRef.current?.scrollToEnd();
       }}
-      style={{ height: "88%" }}
+      style={styles.container}
     >
       {messages.map((message) =>
         message.userID === 1 ? (
@@ -42,37 +42,22 @@ function MessageBubble(props: MessageData) {
   return (
     <View
       style={{
-        backgroundColor: isMyMessage ? "#fcfcfc" : "#dfffc7",
-        width: "65%",
+        ...styles.messageContainer,
         alignSelf: isMyMessage ? "flex-start" : "flex-end",
-        marginVertical: 3,
-        marginHorizontal: 16,
-        paddingVertical: 10,
-        flexDirection: "row",
-        borderRadius: 5,
+        backgroundColor: isMyMessage ? "#fcfcfc" : "#dfffc7",
         borderTopLeftRadius: isMyMessage ? 0 : 5,
         borderTopRightRadius: isMyMessage ? 5 : 0,
       }}
     >
       <View
         style={{
-          height: 0,
-          width: 0,
-          borderLeftWidth: 10,
-          borderLeftColor: "transparent",
-          borderTopColor: "white",
-          borderTopWidth: 10,
-          alignSelf: "flex-start",
-          borderRightColor: "black",
-          right: 10,
-          bottom: 10,
+          ...styles.leftMessageArrow,
           display: isMyMessage ? "flex" : "none",
         }}
       ></View>
       <Text
         style={{
-          fontSize: 16,
-          width: "65%",
+          ...styles.messageText,
           left: isMyMessage ? 0 : 10,
         }}
       >
@@ -80,19 +65,12 @@ function MessageBubble(props: MessageData) {
       </Text>
       <View
         style={{
-          flexDirection: "row",
+          ...styles.timeAndReadContainer,
           left: isMyMessage ? 0 : 10,
         }}
       >
-        <Text
-          style={{
-            fontSize: 12,
-            color: "grey",
-          }}
-        >
-          {message.time}
-        </Text>
-        <View style={{}}>
+        <Text style={styles.timeText}>{message.time}</Text>
+        <View>
           {isMessageRead ? (
             <MaterialCommunityIcons name="read" size={16} color="#5bb6c9" />
           ) : (
@@ -101,15 +79,7 @@ function MessageBubble(props: MessageData) {
         </View>
         <View
           style={{
-            height: 0,
-            width: 0,
-            borderRightWidth: 10,
-            borderRightColor: "transparent",
-            borderTopColor: "#dfffc7",
-            borderTopWidth: 10,
-            alignSelf: "flex-start",
-            left: 9,
-            bottom: 10,
+            ...styles.rightMsgArrow,
             display: isMyMessage ? "none" : "flex",
           }}
         ></View>

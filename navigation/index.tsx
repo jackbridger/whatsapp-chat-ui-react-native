@@ -14,9 +14,9 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import ChatsScreen from "../screens/Chats";
+import ChatsScreen from "../screens/Chats/Chats";
 import StatusScreen from "../screens/Status";
-import Chat from "../screens/Chat";
+import Chat from "../screens/Chat/Chat";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -50,7 +50,7 @@ function RootNavigator() {
           headerShown: true,
           headerTitle: "WhatsApp",
           headerStyle: {
-            backgroundColor: "#075d55",
+            backgroundColor: "#075d54",
           },
           headerTitleStyle: {
             fontWeight: "bold",
