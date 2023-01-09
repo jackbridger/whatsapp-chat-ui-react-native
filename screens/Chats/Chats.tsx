@@ -1,32 +1,40 @@
-import { Image, Text, View, TouchableOpacity } from "react-native";
+import { Image, Text, View, TouchableOpacity, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { FlashList } from "@shopify/flash-list";
 
 import { Conversation, RootTabScreenProps } from "../../types";
 import styles from "./Chats.styles";
 import conversations from "../../data/messages";
-import { Message } from "../../types";
-import messages from "../../data/messages";
+import { SafeAreaView } from "react-native-safe-area-context";
 
+interface ConversationItemProps {
+  item: Conversation;
+}
 export default function ChatsScreen({
   navigation,
 }: RootTabScreenProps<"Chats">) {
+  const renderConversationPreview = (props: ConversationItemProps) => {
+    const { item } = props;
+    return <ConversationPreview key={item.id} conversation={item} />;
+  };
   return (
-    <View style={styles.container}>
-      {conversations.map((conversation: Conversation) => (
-        <ConversationPreview
-          key={conversation.id}
-          conversation={conversation}
-        />
-      ))}
+    <View style={styles.mainContainer}>
+      <FlashList
+        contentContainerStyle={styles.listContainer}
+        data={conversations}
+        renderItem={renderConversationPreview}
+        keyExtractor={(item) => item.id}
+        estimatedItemSize={40}
+      />
     </View>
   );
 }
 
-type ConversationProps = {
+type ConversationPreviewProps = {
   conversation: Conversation;
 };
 
-function ConversationPreview(props: ConversationProps) {
+function ConversationPreview(props: ConversationPreviewProps) {
   const { conversation } = props;
   const navigation = useNavigation();
   const imgSrc = "../../assets/images/wave.png";

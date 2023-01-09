@@ -1,8 +1,16 @@
 import { StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
+import { Dimensions } from "react-native";
+const windowHeight = Dimensions.get("window").height;
+const windowWidth = Dimensions.get("window").width;
 
 export default StyleSheet.create({
-  container: {
+  mainContainer: {
+    backgroundColor: Colors.light.white,
+    height: "100%",
+    paddingTop: "3%",
+  },
+  listContainer: {
     flex: 1,
     alignItems: "center",
     color: Colors.light.text,
@@ -10,8 +18,8 @@ export default StyleSheet.create({
   },
 
   messageContainer: {
-    width: "90%",
-    height: "12%",
+    width: windowWidth * 0.97,
+    height: windowHeight / 15,
     flexDirection: "row",
     justifyContent: "space-around",
   },
