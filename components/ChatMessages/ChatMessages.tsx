@@ -1,32 +1,30 @@
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRef } from "react";
+import { FlashList } from "@shopify/flash-list";
 
 import allConversations from "../../data/messages";
 import styles from "./ChatMessages.styles";
-import { MessageData } from "../../types";
+import { Message, MessageData } from "../../types";
 
 const messages = allConversations[0].messages;
+interface MessageBubbleProps {
+  item: Message;
+}
 
 export default function ChatMessages() {
-  const scrollViewRef = useRef<ScrollView>(null);
+  const renderMessageBubble = (props: MessageBubbleProps) => {
+    const { item } = props;
+    return <MessageBubble message={item} />;
+  };
 
   return (
-    <ScrollView
-      ref={scrollViewRef}
-      onContentSizeChange={() => {
-        scrollViewRef.current?.scrollToEnd();
-      }}
-      style={styles.container}
-    >
-      {messages.map((message) =>
-        message.userID === 1 ? (
-          <MessageBubble message={message} />
-        ) : (
-          <MessageBubble message={message} />
-        )
-      )}
-    </ScrollView>
+    <FlashList
+      inverted
+      data={[...messages].reverse()}
+      renderItem={renderMessageBubble}
+      estimatedItemSize={40}
+    />
   );
 }
 
