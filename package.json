@@ -33,6 +33,7 @@
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
     "react-native-pager-view": "6.0.1",
+    "react-native-reanimated": "^2.13.0",
     "react-native-safe-area-context": "4.4.1",
     "react-native-screens": "~3.18.0",
     "react-native-tab-view": "^3.3.4",

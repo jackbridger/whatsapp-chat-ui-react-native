@@ -2,10 +2,17 @@ import { StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
 
 export default StyleSheet.create({
-  container: {
+  mainContainer: {
+    flex: 1,
+  },
+  sendBtnContainer: {
+    // flexGrow: 1,
     height: "12%",
     padding: "3%",
     flexDirection: "row",
+    position: "absolute",
+    left: 0,
+    backgroundColor: Colors.light.white,
   },
   backgroundImg: {
     flex: 1,
@@ -40,8 +47,5 @@ export default StyleSheet.create({
     width: 50,
     alignItems: "center",
     justifyContent: "center",
-  },
-  mainContainer: {
-    flex: 1,
   },
 });

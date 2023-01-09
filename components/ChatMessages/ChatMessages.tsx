@@ -19,12 +19,14 @@ export default function ChatMessages() {
   };
 
   return (
-    <FlashList
-      inverted
-      data={[...messages].reverse()}
-      renderItem={renderMessageBubble}
-      estimatedItemSize={40}
-    />
+    <View style={{ height: "88%" }}>
+      <FlashList
+        inverted
+        data={[...messages].reverse()}
+        renderItem={renderMessageBubble}
+        estimatedItemSize={40}
+      />
+    </View>
   );
 }
 
