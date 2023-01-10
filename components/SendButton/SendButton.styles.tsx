@@ -1,44 +1,46 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
 import Colors from "../../constants/Colors";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 export default StyleSheet.create({
   sendBtnContainer: {
-    height: "12%",
-    padding: "3%",
-    flexDirection: "row",
+    minHeight: windowHeight * 0.06,
+    maxHeight: windowHeight * 0.4,
+    paddingHorizontal: "1%",
     position: "absolute",
     left: 0,
-    backgroundColor: Colors.light.white,
+    width: windowWidth,
   },
 
   textBoxContainer: {
+    maxHeight: windowHeight * 0.3,
     backgroundColor: Colors.light.white,
-    width: "80%",
+    width: "87%",
+    margin: "1%",
     flexDirection: "row",
     alignItems: "center",
-    height: "70%",
     paddingHorizontal: "2%",
-    borderRadius: 5,
+    borderRadius: 50,
   },
   textInput: {
-    width: "75%",
-    marginHorizontal: "3%",
+    width: "80%",
+    marginHorizontal: "2%",
     fontSize: 20,
     color: Colors.light.text,
     opacity: 0.3,
   },
   voiceButtonContainer: {
-    height: "70%",
-    width: "25%",
-    alignItems: "center",
+    width: "11%",
     justifyContent: "center",
     alignContent: "center",
   },
   voiceButton: {
     backgroundColor: Colors.light.quiteDarkGreen,
     borderRadius: 50,
-    height: 50,
-    width: 50,
+    height: windowWidth * 0.1,
+    width: windowWidth * 0.1,
     alignItems: "center",
     justifyContent: "center",
   },

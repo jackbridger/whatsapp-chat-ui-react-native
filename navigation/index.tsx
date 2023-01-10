@@ -50,7 +50,7 @@ function RootNavigator() {
           headerShown: true,
           headerTitle: "WhatsApp",
           headerStyle: {
-            backgroundColor: "#075d54",
+            backgroundColor: "#008069",
           },
           headerTitleStyle: {
             fontWeight: "bold",
@@ -66,16 +66,16 @@ function RootNavigator() {
         options={{
           headerBackTitle: "",
           headerStyle: {
-            backgroundColor: "#075d54",
+            backgroundColor: "#008069",
           },
           header: ({ navigation, route, options, back }) => {
-            const imgSrc = "../assets/images/wave.png";
+            const imgSrc = "../assets/images/nickcage.jpeg";
             const title = getHeaderTitle(options, route.name);
             return (
               <View
                 style={{
                   flexDirection: "row",
-                  backgroundColor: "#075d54",
+                  backgroundColor: "#008069",
                   height: 100,
                   width: "100%",
                   paddingTop: 40,
@@ -111,7 +111,7 @@ function RootNavigator() {
                   <Text
                     style={{ color: "white", fontSize: 20, fontWeight: "600" }}
                   >
-                    Sanskriti
+                    Nick Cage
                   </Text>
                 </View>
                 <View
@@ -122,8 +122,8 @@ function RootNavigator() {
                     justifyContent: "space-between",
                   }}
                 >
+                  <FontAwesome name="video-camera" size={24} color="white" />
                   <FontAwesome name="phone" size={24} color="white" />
-                  <FontAwesome name="paperclip" size={24} color="white" />
                   <Entypo name="dots-three-vertical" size={24} color="white" />
                 </View>
               </View>
@@ -161,7 +161,7 @@ function TopTabNavigator() {
         tabBarLabelStyle: { fontSize: 16, fontWeight: "bold" },
         tabBarItemStyle: { width: 130 },
         tabBarStyle: {
-          backgroundColor: "#075d54",
+          backgroundColor: "#008069",
         },
         tabBarIconStyle: {
           display: "none",

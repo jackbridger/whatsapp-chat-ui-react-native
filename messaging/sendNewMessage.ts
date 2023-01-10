@@ -1,10 +1,14 @@
-import { Message } from "../types";
+interface SendNewMessageProps {
+  isTyping: boolean;
+  setIsTyping: (isTyping: boolean) => void;
+  newMsg: string;
+  setNewMsg: (newmsg: string) => void;
+}
 
-function sendNewMessage(text: string, userID: number) {
-  const message: Message = {
-    text,
-    time: new Date().toISOString(),
-    userID,
-  };
-  //   insert message into firestore messages table
+export default function sendMsg(props: SendNewMessageProps) {
+  const { isTyping, setIsTyping, newMsg, setNewMsg } = props;
+  if (isTyping) {
+    setNewMsg("");
+    setIsTyping(false);
+  }
 }

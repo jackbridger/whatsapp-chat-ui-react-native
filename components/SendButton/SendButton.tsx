@@ -1,96 +1,102 @@
-import { View, TextInput, Pressable, Keyboard } from "react-native";
-import { useEffect, useState, useRef } from "react";
+import {
+  View,
+  TextInput,
+  Pressable,
+  ImageBackground,
+  Dimensions,
+} from "react-native";
+import { useState, useRef } from "react";
 import {
   Transition,
   Transitioning,
   TransitioningView,
 } from "react-native-reanimated";
+import { Entypo, FontAwesome5, Ionicons } from "@expo/vector-icons";
 
 import Colors from "../../constants/Colors";
-import { Entypo, FontAwesome5, Ionicons } from "@expo/vector-icons";
+import useKeyboardOffsetHeight from "../../helpers/useKeyboardOffsetHeight";
+import sendMsg from "../../messaging/sendNewMessage";
 
 import styles from "./SendButton.styles";
 
 interface SendButtonProps {
   setIsTyping: (isTyping: boolean) => void;
   isTyping: boolean;
+  setHeightOfMessageBox: (height: number) => void;
 }
 export default function SendButton(props: SendButtonProps) {
-  const [keyBoardOffset, setKeyboardOffset] = useState(0);
-
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
-      (e) => {
-        setKeyboardOffset(e.endCoordinates.height); // or some other action
-      }
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
-      () => {
-        setKeyboardOffset(0); // or some other action
-      }
-    );
-
-    return () => {
-      keyboardDidHideListener.remove();
-      keyboardDidShowListener.remove();
-    };
-  }, []);
-
-  const { setIsTyping, isTyping } = props;
+  const whatsappBackgroundImg = "../../assets/images/whatsapp.png";
+  const { setIsTyping, isTyping, setHeightOfMessageBox } = props;
   const [newMsg, setNewMsg] = useState("");
   const ref = useRef<TransitioningView | null>(null);
-  const sendMsg = () => {
-    if (isTyping) {
-      setNewMsg("");
-      setIsTyping(false);
-    }
-  };
+  const keyBoardOffsetHeight = useKeyboardOffsetHeight();
+  const windowHeight = Dimensions.get("window").height;
 
   return (
     <View
       style={{
         ...styles.sendBtnContainer,
-        bottom: keyBoardOffset,
+        bottom: Math.max(keyBoardOffsetHeight, windowHeight * 0.01),
       }}
     >
-      <View style={styles.textBoxContainer}>
-        <Entypo name="emoji-happy" size={24} color={Colors.light.grey} />
-        <TextInput
-          editable
-          multiline
-          style={styles.textInput}
-          value={newMsg}
-          placeholder="Type a message"
-          onChangeText={(_msg) => {
-            if (_msg !== "" && isTyping === false) {
-              setIsTyping(true);
-              ref.current?.animateNextTransition();
-            } else if (isTyping === true && _msg === "") {
-              setIsTyping(false);
-              ref.current?.animateNextTransition();
+      <ImageBackground
+        style={{ flex: 1, flexDirection: "row", width: "100%" }}
+        source={require(whatsappBackgroundImg)}
+        resizeMode="cover"
+      >
+        {/* <ImageBackground
+        // style={styles.backgroundImg}
+        source={require(whatsappBackgroundImg)}
+        resizeMode="cover"
+      > */}
+        <View style={styles.textBoxContainer}>
+          <Entypo name="emoji-happy" size={24} color={Colors.light.grey} />
+          <TextInput
+            editable
+            multiline
+            style={styles.textInput}
+            value={newMsg}
+            placeholder="Message"
+            onContentSizeChange={(e) => {
+              console.log("message height:");
+              console.log(e.nativeEvent.contentSize.height);
+              console.log(e.nativeEvent.contentSize);
+              setHeightOfMessageBox(e.nativeEvent.contentSize.height);
+            }}
+            onChangeText={(_msg) => {
+              if (_msg !== "" && isTyping === false) {
+                setIsTyping(true);
+                ref.current?.animateNextTransition();
+              } else if (isTyping === true && _msg === "") {
+                setIsTyping(false);
+                ref.current?.animateNextTransition();
+              }
+              setNewMsg(_msg);
+            }}
+          />
+          <Entypo name="camera" size={24} color={Colors.light.grey} />
+        </View>
+        <View style={styles.voiceButtonContainer}>
+          <Pressable
+            style={styles.voiceButton}
+            onPress={() =>
+              sendMsg({ isTyping, setIsTyping, newMsg, setNewMsg })
             }
-            setNewMsg(_msg);
-          }}
-        />
-        <Entypo name="camera" size={24} color={Colors.light.grey} />
-      </View>
-      <View style={styles.voiceButtonContainer}>
-        <Pressable style={styles.voiceButton} onPress={sendMsg}>
-          <Transitioning.View ref={ref} transition={msgTypeTransition}>
-            {isTyping ? (
-              <Ionicons name="send" size={24} color={Colors.light.white} />
-            ) : (
-              <FontAwesome5
-                name="microphone"
-                size={24}
-                color={Colors.light.white}
-              />
-            )}
-          </Transitioning.View>
-        </Pressable>
-      </View>
+          >
+            <Transitioning.View ref={ref} transition={msgTypeTransition}>
+              {isTyping ? (
+                <Ionicons name="send" size={16} color={Colors.light.white} />
+              ) : (
+                <FontAwesome5
+                  name="microphone"
+                  size={16}
+                  color={Colors.light.white}
+                />
+              )}
+            </Transitioning.View>
+          </Pressable>
+        </View>
+      </ImageBackground>
     </View>
   );
 }

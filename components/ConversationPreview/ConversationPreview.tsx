@@ -11,7 +11,7 @@ interface ConversationPreviewProps {
 export default function ConversationPreview(props: ConversationPreviewProps) {
   const { conversation } = props;
   const navigation = useNavigation();
-  const imgSrc = "../../assets/images/wave.png";
+  const imgSrc = "../../assets/images/nickcage.jpeg";
   const _onPress = () => {
     navigation.navigate("Chat");
   };

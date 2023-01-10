@@ -1,5 +1,5 @@
 import { View, ImageBackground } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import SendButton from "../../components/SendButton/SendButton";
 import ChatMessages from "../../components/ChatMessages/ChatMessages";
@@ -9,6 +9,8 @@ import styles from "./Chat.styles";
 export default function Chat() {
   const whatsappBackgroundImg = "../../assets/images/whatsapp.png";
   const [isTyping, setIsTyping] = useState(false);
+  const [heightOfMessageBox, setHeightOfMessageBox] = useState(0);
+
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -16,8 +18,12 @@ export default function Chat() {
         source={require(whatsappBackgroundImg)}
         resizeMode="cover"
       >
-        <ChatMessages />
-        <SendButton setIsTyping={setIsTyping} isTyping={isTyping} />
+        <ChatMessages heightOfMessageBox={heightOfMessageBox} />
+        <SendButton
+          setIsTyping={setIsTyping}
+          isTyping={isTyping}
+          setHeightOfMessageBox={setHeightOfMessageBox}
+        />
       </ImageBackground>
     </View>
   );

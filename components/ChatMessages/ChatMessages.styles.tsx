@@ -3,9 +3,7 @@ import { StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
 
 export default StyleSheet.create({
-  container: {
-    height: "88%",
-  },
+  container: {},
   messageContainer: {
     width: "65%",
     marginVertical: 3,
