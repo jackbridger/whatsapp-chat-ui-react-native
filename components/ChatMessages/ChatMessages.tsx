@@ -4,8 +4,9 @@ import { useRef } from "react";
 import { FlashList } from "@shopify/flash-list";
 
 import allConversations from "../../data/messages";
-import styles from "./ChatMessages.styles";
 import { Message, MessageData } from "../../types";
+
+import styles from "./ChatMessages.styles";
 
 const messages = allConversations[0].messages;
 interface MessageBubbleProps {

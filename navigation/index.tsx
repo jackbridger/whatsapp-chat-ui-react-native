@@ -210,9 +210,11 @@ function TopTabNavigator() {
   );
 }
 
-function TabBarIcon(props: {
+interface TabBarIconProps {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
-}) {
+}
+
+function TabBarIcon(props: TabBarIconProps) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
