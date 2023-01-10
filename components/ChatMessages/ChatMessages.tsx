@@ -30,7 +30,7 @@ export default function ChatMessages(props: ChatMessagesProps) {
     <View
       style={{
         height:
-          windowHeight * 0.86 -
+          windowHeight * 0.875 -
           keyBoardOffsetHeight -
           getMessageHeightOffset(heightOfMessageBox, windowHeight),
       }}

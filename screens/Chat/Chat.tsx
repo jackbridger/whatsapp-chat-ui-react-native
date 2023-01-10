@@ -23,6 +23,7 @@ export default function Chat() {
           setIsTyping={setIsTyping}
           isTyping={isTyping}
           setHeightOfMessageBox={setHeightOfMessageBox}
+          heightOfMessageBox={heightOfMessageBox}
         />
       </ImageBackground>
     </View>

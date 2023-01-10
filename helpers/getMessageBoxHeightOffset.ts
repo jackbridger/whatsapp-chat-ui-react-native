@@ -8,7 +8,7 @@ const getMessageHeightOffset = (
   }
   if (heightOfMessageBox > 24) {
     return heightOfMessageBox - windowHeight * 0.005;
-  } else return heightOfMessageBox + windowHeight * 0.01;
+  } else return heightOfMessageBox + windowHeight * 0.03;
 };
 
 export default getMessageHeightOffset;

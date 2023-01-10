@@ -12,6 +12,7 @@ export default StyleSheet.create({
     position: "absolute",
     left: 0,
     width: windowWidth,
+    alignContent: "center",
   },
 
   textBoxContainer: {
@@ -21,8 +22,10 @@ export default StyleSheet.create({
     margin: "1%",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     paddingHorizontal: "2%",
-    borderRadius: 50,
+    paddingVertical: "1%",
+    borderRadius: 20,
   },
   textInput: {
     width: "80%",

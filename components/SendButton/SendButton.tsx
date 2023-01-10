@@ -23,20 +23,24 @@ interface SendButtonProps {
   setIsTyping: (isTyping: boolean) => void;
   isTyping: boolean;
   setHeightOfMessageBox: (height: number) => void;
+  heightOfMessageBox: number;
 }
 export default function SendButton(props: SendButtonProps) {
   const whatsappBackgroundImg = "../../assets/images/whatsapp.png";
-  const { setIsTyping, isTyping, setHeightOfMessageBox } = props;
+  const { setIsTyping, isTyping, setHeightOfMessageBox, heightOfMessageBox } =
+    props;
   const [newMsg, setNewMsg] = useState("");
   const ref = useRef<TransitioningView | null>(null);
   const keyBoardOffsetHeight = useKeyboardOffsetHeight();
+  const isMultiLine = heightOfMessageBox > 24;
+
   const windowHeight = Dimensions.get("window").height;
 
   return (
     <View
       style={{
         ...styles.sendBtnContainer,
-        bottom: Math.max(keyBoardOffsetHeight, windowHeight * 0.01),
+        bottom: Math.max(keyBoardOffsetHeight, windowHeight * 0.02),
       }}
     >
       <ImageBackground
@@ -50,7 +54,16 @@ export default function SendButton(props: SendButtonProps) {
         resizeMode="cover"
       > */}
         <View style={styles.textBoxContainer}>
-          <Entypo name="emoji-happy" size={24} color={Colors.light.grey} />
+          <Entypo
+            name="emoji-happy"
+            size={24}
+            color={Colors.light.grey}
+            style={{
+              position: "absolute",
+              bottom: 10,
+              left: 10,
+            }}
+          />
           <TextInput
             editable
             multiline
@@ -74,9 +87,25 @@ export default function SendButton(props: SendButtonProps) {
               setNewMsg(_msg);
             }}
           />
-          <Entypo name="camera" size={24} color={Colors.light.grey} />
+          <Entypo
+            name="camera"
+            size={24}
+            color={Colors.light.grey}
+            style={{
+              position: "absolute",
+              bottom: 10,
+              right: 10,
+            }}
+          />
         </View>
-        <View style={styles.voiceButtonContainer}>
+        <View
+          style={{
+            ...styles.voiceButtonContainer,
+            position: "absolute",
+            right: 0,
+            bottom: 6,
+          }}
+        >
           <Pressable
             style={styles.voiceButton}
             onPress={() =>
