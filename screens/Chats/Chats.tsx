@@ -10,9 +10,7 @@ import styles from "./Chats.styles";
 interface ConversationItemProps {
   item: Conversation;
 }
-export default function ChatsScreen({
-  navigation,
-}: RootTabScreenProps<"Chats">) {
+export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
   const renderConversationPreview = (props: ConversationItemProps) => {
     const { item } = props;
     return <ConversationPreview key={item.id} conversation={item} />;
@@ -20,7 +18,6 @@ export default function ChatsScreen({
   return (
     <View style={styles.mainContainer}>
       <FlashList
-        contentContainerStyle={styles.listContainer}
         data={conversations}
         renderItem={renderConversationPreview}
         keyExtractor={(item) => item.id}

@@ -7,10 +7,4 @@ export default StyleSheet.create({
     height: "100%",
     paddingTop: "3%",
   },
-  listContainer: {
-    flex: 1,
-    alignItems: "center",
-    color: Colors.light.text,
-    backgroundColor: Colors.light.white,
-  },
 });

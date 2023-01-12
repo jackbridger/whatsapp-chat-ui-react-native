@@ -14,6 +14,7 @@ export default {
     white: "#fff",
     brightGreen: "#24d467",
     msgGreen: "#e7ffdb",
+    inactiveGreen: "#7aa8a2",
   },
   dark: {
     text: "#fff",
