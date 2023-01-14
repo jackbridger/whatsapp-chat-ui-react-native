@@ -8,12 +8,11 @@ import Chat from "../screens/Chat/Chat";
 import ModalScreen from "../screens/ModalScreen";
 
 import { RootStackParamList } from "../types";
-import LinkingConfiguration from "./LinkingConfiguration";
 import ChatHeader from "./ChatHeader";
 
 export default function Navigation() {
   return (
-    <NavigationContainer linking={LinkingConfiguration}>
+    <NavigationContainer>
       <RootNavigator />
     </NavigationContainer>
   );

@@ -71,9 +71,6 @@ export default function SendButton(props: SendButtonProps) {
             value={newMsg}
             placeholder="Message"
             onContentSizeChange={(e) => {
-              console.log("message height:");
-              console.log(e.nativeEvent.contentSize.height);
-              console.log(e.nativeEvent.contentSize);
               setHeightOfMessageBox(e.nativeEvent.contentSize.height);
             }}
             onChangeText={(_msg) => {
