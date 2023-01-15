@@ -2,7 +2,6 @@ import * as React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
 import ChatsScreen from "../screens/Chats/Chats";
 import StatusScreen from "../screens/Status";
 
@@ -22,12 +21,8 @@ export default function TopTabNavigator() {
         tabBarInactiveTintColor: Colors.light.inactiveGreen,
         tabBarActiveTintColor: Colors.light.white,
         tabBarLabelStyle: { fontSize: 16, fontWeight: "bold" },
-        tabBarItemStyle: { width: 130 },
         tabBarStyle: {
           backgroundColor: Colors.light.darkGreen,
-        },
-        tabBarIconStyle: {
-          display: "none",
         },
       }}
     >
