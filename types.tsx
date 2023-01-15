@@ -33,19 +33,19 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
     NativeStackScreenProps<RootStackParamList>
   >;
 
+export type Conversation = {
+  id: string;
+  messages: Message[];
+  users: number[];
+  title: string;
+};
+
 export type Message = {
   text: string;
   time: string;
   userID: number;
   id: string;
 };
-
-export interface Conversation {
-  id: string;
-  messages: Message[];
-  users: number[];
-  title: string;
-}
 
 export interface MessageData {
   message: Message;
