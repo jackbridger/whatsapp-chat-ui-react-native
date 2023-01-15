@@ -4,7 +4,6 @@ import { FlashList } from "@shopify/flash-list";
 import ConversationPreview from "../../components/ConversationPreview/ConversationPreview";
 import { Conversation, RootTabScreenProps } from "../../types";
 import conversations from "../../data/messages";
-
 import styles from "./Chats.styles";
 
 interface ConversationItemProps {
