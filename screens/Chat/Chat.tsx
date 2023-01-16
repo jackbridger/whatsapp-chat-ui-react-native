@@ -1,12 +1,28 @@
 import { View, ImageBackground } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import { RouteProp } from "@react-navigation/native";
 
 import SendButton from "../../components/SendButton/SendButton";
 import ChatMessages from "../../components/ChatMessages/ChatMessages";
-
+import { ConversationType } from "../../types";
+import { ConversationsContext } from "../../context/conversationContext";
 import styles from "./Chat.styles";
+interface ChatProps {
+  route: RouteProp<
+    {
+      params: {
+        conversation: ConversationType;
+      };
+    },
+    "params"
+  >;
+}
 
-export default function Chat() {
+export default function Chat(props: ChatProps) {
+  const { conversation } = props.route.params;
+  const { getCurrentConversation } = useContext(ConversationsContext);
+  const { messages } = getCurrentConversation(conversation.id);
+
   const whatsappBackgroundImg = "../../assets/images/whatsapp.png";
   const [isTyping, setIsTyping] = useState(false);
   const [heightOfMessageBox, setHeightOfMessageBox] = useState(0);
@@ -18,19 +34,18 @@ export default function Chat() {
         source={require(whatsappBackgroundImg)}
         resizeMode="cover"
       >
-        <ChatMessages heightOfMessageBox={heightOfMessageBox} />
+        <ChatMessages
+          heightOfMessageBox={heightOfMessageBox}
+          messages={messages}
+        />
         <SendButton
           setIsTyping={setIsTyping}
           isTyping={isTyping}
           setHeightOfMessageBox={setHeightOfMessageBox}
           heightOfMessageBox={heightOfMessageBox}
+          thisConversation={conversation}
         />
       </ImageBackground>
     </View>
   );
-}
-
-interface AnimatedIconsProps {
-  Voice: React.ElementType<any>;
-  Send: React.ElementType<any>;
 }

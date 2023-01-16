@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { MessageData } from "../../types";
+import { MessageDataType } from "../../types";
 import styles from "./MessageBubble.styles";
 
-export default function MessageBubble(props: MessageData) {
+export default function MessageBubble(props: MessageDataType) {
   const { message } = props;
   const isMyMessage = message.userID === 1;
   const isMessageRead = false;

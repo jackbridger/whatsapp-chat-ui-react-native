@@ -29,6 +29,7 @@ export default StyleSheet.create({
   },
   msgPreview: {
     color: Colors.light.offBlack,
+    width: "80%",
   },
   msgDataContainer: {
     flexDirection: "row",

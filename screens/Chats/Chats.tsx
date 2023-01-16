@@ -1,15 +1,17 @@
 import { View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
+import React, { useContext } from "react";
 
 import ConversationPreview from "../../components/ConversationPreview/ConversationPreview";
-import { Conversation, RootTabScreenProps } from "../../types";
-import conversations from "../../data/messages";
+import { ConversationType, RootTabScreenProps } from "../../types";
+import { ConversationsContext } from "../../context/conversationContext";
 import styles from "./Chats.styles";
 
 interface ConversationItemProps {
-  item: Conversation;
+  item: ConversationType;
 }
 export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
+  const { conversations } = useContext(ConversationsContext);
   const renderConversationPreview = (props: ConversationItemProps) => {
     const { item } = props;
     return <ConversationPreview key={item.id} conversation={item} />;

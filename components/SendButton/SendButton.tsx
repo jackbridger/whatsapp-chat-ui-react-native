@@ -5,7 +5,7 @@ import {
   ImageBackground,
   Dimensions,
 } from "react-native";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import {
   Transition,
   Transitioning,
@@ -16,6 +16,8 @@ import { Entypo, FontAwesome5, Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import useKeyboardOffsetHeight from "../../helpers/useKeyboardOffsetHeight";
 import sendMsg from "../../messaging/sendNewMessage";
+import { MessageType, ConversationType } from "../../types";
+import { ConversationsContext } from "../../context/conversationContext";
 
 import styles from "./SendButton.styles";
 
@@ -24,15 +26,23 @@ interface SendButtonProps {
   isTyping: boolean;
   setHeightOfMessageBox: (height: number) => void;
   heightOfMessageBox: number;
+  thisConversation: ConversationType;
 }
 export default function SendButton(props: SendButtonProps) {
   const whatsappBackgroundImg = "../../assets/images/whatsapp.png";
-  const { setIsTyping, isTyping, setHeightOfMessageBox, heightOfMessageBox } =
-    props;
+  const {
+    setIsTyping,
+    isTyping,
+    setHeightOfMessageBox,
+    heightOfMessageBox,
+    thisConversation,
+  } = props;
   const [newMsg, setNewMsg] = useState("");
   const ref = useRef<TransitioningView | null>(null);
   const keyBoardOffsetHeight = useKeyboardOffsetHeight();
   const isMultiLine = heightOfMessageBox > 24;
+  const userID = 2;
+  const { sendMessage } = useContext(ConversationsContext);
 
   const windowHeight = Dimensions.get("window").height;
 
@@ -48,11 +58,6 @@ export default function SendButton(props: SendButtonProps) {
         source={require(whatsappBackgroundImg)}
         resizeMode="cover"
       >
-        {/* <ImageBackground
-        // style={styles.backgroundImg}
-        source={require(whatsappBackgroundImg)}
-        resizeMode="cover"
-      > */}
         <View style={styles.textBoxContainer}>
           <Entypo
             name="emoji-happy"
@@ -106,7 +111,14 @@ export default function SendButton(props: SendButtonProps) {
           <Pressable
             style={styles.voiceButton}
             onPress={() =>
-              sendMsg({ isTyping, setIsTyping, newMsg, setNewMsg })
+              sendMessage(
+                newMsg,
+                thisConversation.id,
+                userID,
+                setNewMsg,
+                isTyping,
+                setIsTyping
+              )
             }
           >
             <Transitioning.View ref={ref} transition={msgTypeTransition}>

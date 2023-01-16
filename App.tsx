@@ -1,11 +1,14 @@
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import Navigation from "./navigation";
+import { ConversationsProvider } from "./context/conversationContext";
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <Navigation />
-    </SafeAreaProvider>
+    <ConversationsProvider>
+      <SafeAreaProvider>
+        <Navigation />
+      </SafeAreaProvider>
+    </ConversationsProvider>
   );
 }

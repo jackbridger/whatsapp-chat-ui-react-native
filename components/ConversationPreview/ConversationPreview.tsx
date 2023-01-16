@@ -1,27 +1,41 @@
 import { Image, Text, View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { Conversation } from "../../types";
+import { ConversationType } from "../../types";
 
 import styles from "./ConversationPreview.styles";
 interface ConversationPreviewProps {
-  conversation: Conversation;
+  conversation: ConversationType;
+}
+
+interface ChatRouteParams {
+  conversation: ConversationType;
 }
 
 export default function ConversationPreview(props: ConversationPreviewProps) {
   const { conversation } = props;
   const navigation = useNavigation();
   const imgSrc = "../../assets/images/nickcage.jpeg";
-  const _onPress = () => {
-    navigation.navigate("Chat");
+
+  const chatRouteParams: ChatRouteParams = {
+    conversation,
   };
+
+  const _onPress = () => {
+    navigation.navigate("Chat", chatRouteParams);
+  };
+
   return (
     <TouchableOpacity onPress={_onPress} style={styles.messageContainer}>
       <View style={styles.imgAndMsgSubContainer}>
         <Image style={styles.profileImg} source={require(imgSrc)} />
         <View>
           <Text style={styles.msgTitle}>{conversation.title}</Text>
-          <Text style={styles.msgPreview}>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={styles.msgPreview}
+          >
             {conversation.messages[conversation.messages.length - 1].text}
           </Text>
         </View>
