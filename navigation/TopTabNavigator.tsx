@@ -2,10 +2,10 @@ import * as React from "react";
 
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import Colors from "../constants/Colors";
 import ChatsScreen from "../screens/Chats/Chats";
+import CallsScreen from "../screens/Calls";
 import StatusScreen from "../screens/Status";
-
+import Colors from "../constants/Colors";
 import { RootTabParamList, RootTabScreenProps } from "../types";
 
 const TopTab = createMaterialTopTabNavigator<RootTabParamList>();
@@ -43,7 +43,7 @@ export default function TopTabNavigator() {
       />
       <TopTab.Screen
         name="Calls"
-        component={StatusScreen}
+        component={CallsScreen}
         options={{
           title: "Calls",
         }}
