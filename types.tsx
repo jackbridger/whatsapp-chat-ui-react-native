@@ -42,7 +42,7 @@ export type ConversationType = {
 
 export type MessageType = {
   text: string;
-  time: string;
+  time: Date;
   userID: number;
   id: string;
 };
@@ -61,5 +61,6 @@ export type ConversationsContextType = {
     isTyping: boolean,
     setIsTyping: (isTyping: boolean) => void
   ) => void;
-  getCurrentConversation: (thisConversationID: string) => ConversationType;
+  getCurrentConversation: () => ConversationType;
+  setCurrentConversation: (id: string) => void;
 };

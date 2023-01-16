@@ -8,6 +8,6 @@ export default function formatMessage(
     id: `${Math.random()}`,
     text: msg,
     userID: userID,
-    time: "12:00pm",
+    time: new Date(),
   };
 }

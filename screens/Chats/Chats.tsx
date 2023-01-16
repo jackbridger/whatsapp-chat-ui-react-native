@@ -14,6 +14,7 @@ export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
   const { conversations } = useContext(ConversationsContext);
   const renderConversationPreview = (props: ConversationItemProps) => {
     const { item } = props;
+
     return <ConversationPreview key={item.id} conversation={item} />;
   };
   return (

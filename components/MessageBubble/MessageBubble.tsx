@@ -1,5 +1,6 @@
 import { View, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import dayjs from "dayjs";
 
 import { MessageDataType } from "../../types";
 import styles from "./MessageBubble.styles";
@@ -38,7 +39,9 @@ export default function MessageBubble(props: MessageDataType) {
           left: isMyMessage ? 0 : 10,
         }}
       >
-        <Text style={styles.timeText}>{message.time}</Text>
+        <Text style={styles.timeText}>
+          {dayjs(message.time).format("HH:mm A")}
+        </Text>
         <View>
           {isMessageRead ? (
             <MaterialCommunityIcons name="read" size={16} color="#5bb6c9" />

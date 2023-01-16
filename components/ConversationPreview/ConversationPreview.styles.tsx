@@ -21,6 +21,7 @@ export default StyleSheet.create({
     width: 50,
     height: 50,
     marginRight: 10,
+    marginLeft: 10,
     borderRadius: 50,
   },
   msgTitle: {

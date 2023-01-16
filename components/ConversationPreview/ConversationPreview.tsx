@@ -1,9 +1,13 @@
 import { Image, Text, View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
+import dayjs from "dayjs";
 
 import { ConversationType } from "../../types";
-
 import styles from "./ConversationPreview.styles";
+import { ConversationsContext } from "../../context/conversationContext";
+import images from "../../assets/index";
+
 interface ConversationPreviewProps {
   conversation: ConversationType;
 }
@@ -14,21 +18,23 @@ interface ChatRouteParams {
 
 export default function ConversationPreview(props: ConversationPreviewProps) {
   const { conversation } = props;
+  const { setCurrentConversation } = useContext(ConversationsContext);
   const navigation = useNavigation();
-  const imgSrc = "../../assets/images/nickcage.jpeg";
+  const profileImg = images[conversation.id];
 
   const chatRouteParams: ChatRouteParams = {
     conversation,
   };
 
   const _onPress = () => {
+    setCurrentConversation(conversation.id);
     navigation.navigate("Chat", chatRouteParams);
   };
 
   return (
     <TouchableOpacity onPress={_onPress} style={styles.messageContainer}>
       <View style={styles.imgAndMsgSubContainer}>
-        <Image style={styles.profileImg} source={require(imgSrc)} />
+        <Image style={styles.profileImg} source={profileImg} />
         <View>
           <Text style={styles.msgTitle}>{conversation.title}</Text>
           <Text
@@ -42,7 +48,11 @@ export default function ConversationPreview(props: ConversationPreviewProps) {
       </View>
       <View style={styles.msgDataContainer}>
         <View style={styles.msgDataSubContainer}>
-          <Text style={styles.timeText}>9:29</Text>
+          <Text style={styles.timeText}>
+            {dayjs(
+              conversation.messages[conversation.messages.length - 1].time
+            ).format("HH:mm A")}
+          </Text>
           <View style={styles.numberOfMsgsContainer}>
             <Text style={styles.numberOfMsgsText}>2</Text>
           </View>

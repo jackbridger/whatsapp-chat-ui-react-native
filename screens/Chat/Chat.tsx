@@ -21,7 +21,7 @@ interface ChatProps {
 export default function Chat(props: ChatProps) {
   const { conversation } = props.route.params;
   const { getCurrentConversation } = useContext(ConversationsContext);
-  const { messages } = getCurrentConversation(conversation.id);
+  const { messages } = getCurrentConversation();
 
   const whatsappBackgroundImg = "../../assets/images/whatsapp.png";
   const [isTyping, setIsTyping] = useState(false);

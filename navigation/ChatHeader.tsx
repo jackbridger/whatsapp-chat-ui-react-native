@@ -1,17 +1,23 @@
-import * as React from "react";
+import { useContext, useEffect } from "react";
 import { Ionicons, FontAwesome, Entypo } from "@expo/vector-icons";
 import { Pressable, Image, View, Text } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ParamListBase } from "@react-navigation/native";
+import images from "../assets/index";
+
 import Colors from "../constants/Colors";
+import { ConversationsContext } from "../context/conversationContext";
 
 interface Props {
   navigation: NativeStackNavigationProp<ParamListBase, string, undefined>;
 }
 
 export default function ChatHeader(props: Props) {
+  const { getCurrentConversation } = useContext(ConversationsContext);
+  const { id, title } = getCurrentConversation();
   const { navigation } = props;
-  const imgSrc = "../assets/images/nickcage.jpeg";
+  const profileImg = images[id];
+
   return (
     <View
       style={{
@@ -47,7 +53,7 @@ export default function ChatHeader(props: Props) {
             marginRight: 10,
             borderRadius: 50,
           }}
-          source={require(imgSrc)}
+          source={profileImg}
         />
         <Text
           style={{
@@ -56,7 +62,7 @@ export default function ChatHeader(props: Props) {
             fontWeight: "600",
           }}
         >
-          Nick Cage
+          {title}
         </Text>
       </View>
       <View
