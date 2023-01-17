@@ -51,7 +51,7 @@ export default function ConversationPreview(props: ConversationPreviewProps) {
           <Text style={styles.timeText}>
             {dayjs(
               conversation.messages[conversation.messages.length - 1].time
-            ).format("HH:mm A")}
+            ).format("HH:mm")}
           </Text>
           <View style={styles.numberOfMsgsContainer}>
             <Text style={styles.numberOfMsgsText}>2</Text>

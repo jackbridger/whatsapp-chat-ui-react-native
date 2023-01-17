@@ -15,8 +15,7 @@ import { Entypo, FontAwesome5, Ionicons } from "@expo/vector-icons";
 
 import Colors from "../../constants/Colors";
 import useKeyboardOffsetHeight from "../../helpers/useKeyboardOffsetHeight";
-import sendMsg from "../../messaging/sendNewMessage";
-import { MessageType, ConversationType } from "../../types";
+import { ConversationType } from "../../types";
 import { ConversationsContext } from "../../context/conversationContext";
 
 import styles from "./SendButton.styles";
@@ -30,17 +29,11 @@ interface SendButtonProps {
 }
 export default function SendButton(props: SendButtonProps) {
   const whatsappBackgroundImg = "../../assets/images/whatsapp.png";
-  const {
-    setIsTyping,
-    isTyping,
-    setHeightOfMessageBox,
-    heightOfMessageBox,
-    thisConversation,
-  } = props;
+  const { setIsTyping, isTyping, setHeightOfMessageBox, thisConversation } =
+    props;
   const [newMsg, setNewMsg] = useState("");
   const ref = useRef<TransitioningView | null>(null);
   const keyBoardOffsetHeight = useKeyboardOffsetHeight();
-  const isMultiLine = heightOfMessageBox > 24;
   const userID = 2;
   const { sendMessage } = useContext(ConversationsContext);
 
