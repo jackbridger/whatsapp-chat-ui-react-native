@@ -5,7 +5,6 @@ import * as React from "react";
 import TopTabNavigator from "./TopTabNavigator";
 import Colors from "../constants/Colors";
 import Chat from "../screens/Chat/Chat";
-import ModalScreen from "../screens/ModalScreen";
 
 import { RootStackParamList } from "../types";
 import ChatHeader from "./ChatHeader";
@@ -50,9 +49,6 @@ function RootNavigator() {
           header: ({ navigation }) => <ChatHeader navigation={navigation} />,
         }}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
     </Stack.Navigator>
   );
 }

@@ -3,7 +3,7 @@ import { ConversationType } from "../types";
 const startingConversations: ConversationType[] = [
   {
     id: "101",
-    title: "Catchup",
+    title: "Nic Cage",
     messages: [
       {
         text: "Hey how are you?",
@@ -190,7 +190,7 @@ const startingConversations: ConversationType[] = [
   },
   {
     id: "102",
-    title: "Jack & Jill",
+    title: "Nic",
     messages: [
       {
         text: "Test",
@@ -210,7 +210,7 @@ const startingConversations: ConversationType[] = [
   // generate more conversations here
   {
     id: "103",
-    title: "Catchup",
+    title: "Mr Cage",
     messages: [
       {
         text: "Hey how are you?",
@@ -229,7 +229,7 @@ const startingConversations: ConversationType[] = [
   },
   {
     id: "104",
-    title: "Catchup",
+    title: "Nic's birthday",
     messages: [
       {
         text: "Hey how are you?",
