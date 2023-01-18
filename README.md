@@ -1,4 +1,4 @@
-## A whatsApp clone in React Native
+## A WhatsApp clone in React Native
 
 Billion of us rely on WhatsApp every day.
 
@@ -17,4 +17,4 @@ $ yarn install
 $ yarn ios
 ```
 
-There is also an article for this project on Dev.to
+There is [an article for this project on Dev.to](https://dev.to/jacksbridger/whatsapp-ui-in-react-native-part-1-4nbm)
