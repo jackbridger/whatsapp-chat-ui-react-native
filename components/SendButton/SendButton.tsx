@@ -12,11 +12,30 @@ import {
   TransitioningView,
 } from "react-native-reanimated";
 import { Entypo, FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
 
 import Colors from "../../constants/Colors";
 import useKeyboardOffsetHeight from "../../helpers/useKeyboardOffsetHeight";
 import { ConversationType } from "../../types";
+import { sendMessage } from "../../redux/reducers/conversationsReducer";
+import formatMessage from "../../helpers/formatMessage";
 // import { ConversationsContext } from "../../context/conversationContext";
+
+function _prepMessage(
+  newMsg: string,
+  thisConversationID: string,
+  userID: number,
+  setNewMsg: (msg: string) => void,
+  isTyping: boolean,
+  setIsTyping: (isTyping: boolean) => void
+) {
+  if (isTyping) {
+    setNewMsg("");
+    setIsTyping(false);
+    const message = formatMessage(newMsg, userID, thisConversationID);
+    return message;
+  }
+}
 
 import styles from "./SendButton.styles";
 
@@ -28,6 +47,7 @@ interface SendButtonProps {
   thisConversation: ConversationType;
 }
 export default function SendButton(props: SendButtonProps) {
+  const dispatch = useDispatch();
   const whatsappBackgroundImg = "../../assets/images/whatsapp.png";
   const { setIsTyping, isTyping, setHeightOfMessageBox, thisConversation } =
     props;
@@ -35,7 +55,6 @@ export default function SendButton(props: SendButtonProps) {
   const ref = useRef<TransitioningView | null>(null);
   const keyBoardOffsetHeight = useKeyboardOffsetHeight();
   const userID = 2;
-  // const { sendMessage } = useContext(ConversationsContext);
 
   const windowHeight = Dimensions.get("window").height;
 
@@ -103,16 +122,19 @@ export default function SendButton(props: SendButtonProps) {
         >
           <Pressable
             style={styles.voiceButton}
-            onPress={() =>
-              sendMessage(
+            onPress={() => {
+              const message = _prepMessage(
                 newMsg,
                 thisConversation.id,
                 userID,
                 setNewMsg,
                 isTyping,
                 setIsTyping
-              )
-            }
+              );
+              if (message) {
+                dispatch(sendMessage(message));
+              }
+            }}
           >
             <Transitioning.View ref={ref} transition={msgTypeTransition}>
               {isTyping ? (

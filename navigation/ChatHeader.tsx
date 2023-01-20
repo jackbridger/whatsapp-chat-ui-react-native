@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 import { ConversationState } from "../redux/reducers/conversationsReducer";
 import images from "../assets/index";
+import type { RootState } from "../redux/store";
 
 import Colors from "../constants/Colors";
 // import { ConversationsContext } from "../context/conversationContext";
@@ -16,12 +17,14 @@ interface Props {
 }
 
 export default function ChatHeader(props: Props) {
-  const currentConversation = useSelector((state: ConversationState) =>
-    state.currentConversation ? state.currentConversation : []
+  const currentConversation = useSelector(
+    (state: RootState) => state.conversations.currentConversation
   );
-  const { id, title } = currentConversation;
+  const id = currentConversation && currentConversation.id;
+  const title = currentConversation && currentConversation.title;
   const { navigation } = props;
-  const profileImg = images[id];
+
+  const profileImg = id && images[id];
 
   return (
     <View

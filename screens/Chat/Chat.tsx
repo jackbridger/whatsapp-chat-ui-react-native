@@ -8,6 +8,8 @@ import ChatMessages from "../../components/ChatMessages/ChatMessages";
 import { ConversationType } from "../../types";
 import { ConversationState } from "../../redux/reducers/conversationsReducer";
 // import { ConversationsContext } from "../../context/conversationContext";
+import { RootState } from "../../redux/store";
+
 import styles from "./Chat.styles";
 interface ChatProps {
   route: RouteProp<
@@ -21,8 +23,11 @@ interface ChatProps {
 }
 
 export default function Chat(props: ChatProps) {
-  const { conversation } = props.route.params;
-  const messages = conversation.messages;
+  const conversation = useSelector(
+    (state: RootState) => state.conversations.currentConversation
+  );
+  const messages = conversation ? conversation.messages : [];
+
   // const messages = useSelector((state: ConversationState) =>
   //   state.currentConversation ? state.currentConversation.messages : []
   // );

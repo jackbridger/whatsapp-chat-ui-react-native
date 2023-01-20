@@ -40,7 +40,7 @@ export type ConversationType = {
 
 export type MessageType = {
   text: string;
-  time: Date;
+  time: string;
   userID: number;
   id: string;
   conversationID: string;

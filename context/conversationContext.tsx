@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 import { ConversationType, ConversationsContextType } from "../types";
 import startingConversations from "../data/startingConversations";
-import formatMessage from "../helpers/formatMessages";
+import formatMessage from "../helpers/formatMessage";
 
 export const ConversationsContext = createContext<ConversationsContextType>({
   conversations: startingConversations,
@@ -79,12 +79,4 @@ export const ConversationsProvider = ({ children }) => {
       {children}
     </ConversationsContext.Provider>
   );
-};
-
-const sortConversations = (conversations: ConversationType[]) => {
-  return conversations.sort((a, b) => {
-    const lastMessageA = a.messages[a.messages.length - 1];
-    const lastMessageB = b.messages[b.messages.length - 1];
-    return lastMessageB.time.getTime() - lastMessageA.time.getTime();
-  });
 };

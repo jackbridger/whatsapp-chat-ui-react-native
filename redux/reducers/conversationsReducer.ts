@@ -3,6 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 import startingConversations from "../../data/startingConversations";
 import { ConversationType, MessageType } from "../../types";
+import sortConversations from "../../helpers/sortConversations";
 
 export interface ConversationState {
   conversations: ConversationType[];
@@ -10,7 +11,7 @@ export interface ConversationState {
 }
 
 const initialState: ConversationState = {
-  conversations: startingConversations,
+  conversations: sortConversations(startingConversations),
   currentConversation: null,
 };
 
@@ -22,18 +23,14 @@ export const conversationsSlice = createSlice({
       state: ConversationState,
       action: PayloadAction<ConversationType[]>
     ): void => {
-      state.conversations = action.payload;
+      state.conversations = sortConversations(action.payload);
     },
     setCurrentConversation: (
       state: ConversationState,
-      action: PayloadAction<string>
+      action: PayloadAction<ConversationType>
     ): void => {
-      const id = action.payload;
-      const currentConvo = state.conversations.find((conv) => conv.id === id);
-      if (currentConvo) {
-        state.currentConversation = currentConvo;
-      } else {
-        state.currentConversation = null;
+      if (action.payload) {
+        state.currentConversation = action.payload;
       }
     },
 
@@ -48,6 +45,13 @@ export const conversationsSlice = createSlice({
       if (conversationToUpdate) {
         conversationToUpdate.messages.push(message);
       }
+      if (
+        state.currentConversation &&
+        message.conversationID === state.currentConversation.id
+      ) {
+        state.currentConversation.messages.push(message);
+      }
+      state.conversations = sortConversations(state.conversations);
     },
   },
 });

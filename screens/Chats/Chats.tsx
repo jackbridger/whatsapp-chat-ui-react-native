@@ -11,7 +11,9 @@ interface ConversationItemProps {
   item: ConversationType;
 }
 export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
-  const conversations = useSelector((state: RootState) => state.conversations);
+  const conversations = useSelector(
+    (state: RootState) => state.conversations.conversations
+  );
 
   const renderConversationPreview = (props: ConversationItemProps) => {
     const { item } = props;
@@ -21,7 +23,7 @@ export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
   return (
     <View style={styles.mainContainer}>
       <FlashList
-        data={conversations.conversations}
+        data={conversations}
         renderItem={renderConversationPreview}
         keyExtractor={(item) => item.id}
         estimatedItemSize={40}
