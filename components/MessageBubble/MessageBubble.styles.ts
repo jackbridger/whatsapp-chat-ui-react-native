@@ -42,7 +42,7 @@ export default StyleSheet.create({
     borderTopColor: Colors.light.msgGreen,
     borderTopWidth: 10,
     alignSelf: "flex-start",
-    left: 9,
+    left: 6,
     bottom: 10,
   },
 });
