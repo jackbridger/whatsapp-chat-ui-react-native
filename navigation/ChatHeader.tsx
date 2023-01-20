@@ -5,12 +5,11 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ParamListBase } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
-import { ConversationState } from "../redux/reducers/conversationsReducer";
+import { ConversationState } from "../redux/conversationsReducer";
 import images from "../assets/index";
 import type { RootState } from "../redux/store";
 
 import Colors from "../constants/Colors";
-// import { ConversationsContext } from "../context/conversationContext";
 
 interface Props {
   navigation: NativeStackNavigationProp<ParamListBase, string, undefined>;

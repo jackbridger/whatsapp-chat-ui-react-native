@@ -4,10 +4,9 @@ import { useContext } from "react";
 import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
 
-import { setCurrentConversation } from "../../redux/reducers/conversationsReducer";
+import { setCurrentConversation } from "../../redux/conversationsReducer";
 import { ConversationType } from "../../types";
 import styles from "./ConversationPreview.styles";
-// import { ConversationsContext } from "../../context/conversationContext";
 import images from "../../assets/index";
 
 interface ConversationPreviewProps {

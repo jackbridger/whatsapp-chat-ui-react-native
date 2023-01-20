@@ -3,7 +3,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 // import thunk from "redux-thunk";
 
-import conversationsReducer from "./reducers/conversationsReducer";
+import conversationsReducer from "./conversationsReducer";
 
 const persistConfig = {};
 

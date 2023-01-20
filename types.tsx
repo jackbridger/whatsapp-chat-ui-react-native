@@ -49,17 +49,3 @@ export type MessageType = {
 export interface MessageDataType {
   message: MessageType;
 }
-
-export type ConversationsContextType = {
-  conversations: ConversationType[];
-  sendMessage: (
-    message: string,
-    conversationID: string,
-    userID: number,
-    setNewMsg: (msg: string) => void,
-    isTyping: boolean,
-    setIsTyping: (isTyping: boolean) => void
-  ) => void;
-  getCurrentConversation: () => ConversationType;
-  setCurrentConversation: (id: string) => void;
-};

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import startingConversations from "../../data/startingConversations";
-import { ConversationType, MessageType } from "../../types";
-import sortConversations from "../../helpers/sortConversations";
+import startingConversations from "../data/startingConversations";
+import { ConversationType, MessageType } from "../types";
+import sortConversations from "../helpers/sortConversations";
 
 export interface ConversationState {
   conversations: ConversationType[];
@@ -61,42 +61,3 @@ export const { addAllConversations, sendMessage, setCurrentConversation } =
   conversationsSlice.actions;
 
 export default conversationsSlice.reducer;
-
-// import { ConversationType, MessageType } from "../../types";
-
-// type ConversationsReduxState = {
-//   conversations: ConversationType[];
-// };
-
-// type Action = {
-//   type: ConversationActionTypes;
-//   message: MessageType;
-// };
-// enum ConversationActionTypes {
-//   SEND_MESSAGE = "SEND_MESSAGE",
-// }
-
-// const initialState: ConversationsReduxState = {
-//   conversations: [],
-// };
-
-// export default (state = initialState, action: Action) => {
-//   switch (action.type) {
-//     case "SEND_MESSAGE":
-//       state.conversations.map((conversation) => {
-//         if (conversation.id === action.message.conversationID) {
-//           conversation.messages.push(action.message);
-//         }
-//       });
-//       return {
-//         ...state,
-//       };
-//     // case "COUNT_DECRESE":
-//     //   return {
-//     //     ...state,
-//     //     count: state.count - 1,
-//     //   };
-//     default:
-//       return state;
-//   }
-// };

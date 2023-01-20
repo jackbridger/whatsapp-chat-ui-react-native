@@ -17,9 +17,8 @@ import { useDispatch } from "react-redux";
 import Colors from "../../constants/Colors";
 import useKeyboardOffsetHeight from "../../helpers/useKeyboardOffsetHeight";
 import { ConversationType } from "../../types";
-import { sendMessage } from "../../redux/reducers/conversationsReducer";
+import { sendMessage } from "../../redux/conversationsReducer";
 import formatMessage from "../../helpers/formatMessage";
-// import { ConversationsContext } from "../../context/conversationContext";
 
 function _prepMessage(
   newMsg: string,
