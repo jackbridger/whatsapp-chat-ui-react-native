@@ -3,18 +3,23 @@ import { Ionicons, FontAwesome, Entypo } from "@expo/vector-icons";
 import { Pressable, Image, View, Text } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ParamListBase } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+
+import { ConversationState } from "../redux/reducers/conversationsReducer";
 import images from "../assets/index";
 
 import Colors from "../constants/Colors";
-import { ConversationsContext } from "../context/conversationContext";
+// import { ConversationsContext } from "../context/conversationContext";
 
 interface Props {
   navigation: NativeStackNavigationProp<ParamListBase, string, undefined>;
 }
 
 export default function ChatHeader(props: Props) {
-  const { getCurrentConversation } = useContext(ConversationsContext);
-  const { id, title } = getCurrentConversation();
+  const currentConversation = useSelector((state: ConversationState) =>
+    state.currentConversation ? state.currentConversation : []
+  );
+  const { id, title } = currentConversation;
   const { navigation } = props;
   const profileImg = images[id];
 

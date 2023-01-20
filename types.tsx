@@ -43,6 +43,7 @@ export type MessageType = {
   time: Date;
   userID: number;
   id: string;
+  conversationID: string;
 };
 
 export interface MessageDataType {

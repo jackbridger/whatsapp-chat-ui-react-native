@@ -16,7 +16,7 @@ import { Entypo, FontAwesome5, Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import useKeyboardOffsetHeight from "../../helpers/useKeyboardOffsetHeight";
 import { ConversationType } from "../../types";
-import { ConversationsContext } from "../../context/conversationContext";
+// import { ConversationsContext } from "../../context/conversationContext";
 
 import styles from "./SendButton.styles";
 
@@ -35,7 +35,7 @@ export default function SendButton(props: SendButtonProps) {
   const ref = useRef<TransitioningView | null>(null);
   const keyBoardOffsetHeight = useKeyboardOffsetHeight();
   const userID = 2;
-  const { sendMessage } = useContext(ConversationsContext);
+  // const { sendMessage } = useContext(ConversationsContext);
 
   const windowHeight = Dimensions.get("window").height;
 

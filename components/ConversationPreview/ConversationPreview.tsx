@@ -2,10 +2,12 @@ import { Image, Text, View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useContext } from "react";
 import dayjs from "dayjs";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentConversation } from "../../redux/reducers/conversationsReducer";
 
 import { ConversationType } from "../../types";
 import styles from "./ConversationPreview.styles";
-import { ConversationsContext } from "../../context/conversationContext";
+// import { ConversationsContext } from "../../context/conversationContext";
 import images from "../../assets/index";
 
 interface ConversationPreviewProps {
@@ -18,7 +20,7 @@ interface ChatRouteParams {
 
 export default function ConversationPreview(props: ConversationPreviewProps) {
   const { conversation } = props;
-  const { setCurrentConversation } = useContext(ConversationsContext);
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const profileImg = images[conversation.id];
 
@@ -27,7 +29,7 @@ export default function ConversationPreview(props: ConversationPreviewProps) {
   };
 
   const _onPress = () => {
-    setCurrentConversation(conversation.id);
+    dispatch(setCurrentConversation(conversation.id));
     navigation.navigate("Chat", chatRouteParams);
   };
 

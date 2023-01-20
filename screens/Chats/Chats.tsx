@@ -1,17 +1,18 @@
 import { View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
-import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 
 import ConversationPreview from "../../components/ConversationPreview/ConversationPreview";
 import { ConversationType, RootTabScreenProps } from "../../types";
-import { ConversationsContext } from "../../context/conversationContext";
+import type { RootState } from "../../redux/store";
 import styles from "./Chats.styles";
 
 interface ConversationItemProps {
   item: ConversationType;
 }
 export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
-  const { conversations } = useContext(ConversationsContext);
+  const conversations = useSelector((state: RootState) => state.conversations);
+
   const renderConversationPreview = (props: ConversationItemProps) => {
     const { item } = props;
 
@@ -20,7 +21,7 @@ export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
   return (
     <View style={styles.mainContainer}>
       <FlashList
-        data={conversations}
+        data={conversations.conversations}
         renderItem={renderConversationPreview}
         keyExtractor={(item) => item.id}
         estimatedItemSize={40}

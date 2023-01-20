@@ -1,11 +1,13 @@
 import { View, ImageBackground } from "react-native";
 import { useState, useContext } from "react";
 import { RouteProp } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 import SendButton from "../../components/SendButton/SendButton";
 import ChatMessages from "../../components/ChatMessages/ChatMessages";
 import { ConversationType } from "../../types";
-import { ConversationsContext } from "../../context/conversationContext";
+import { ConversationState } from "../../redux/reducers/conversationsReducer";
+// import { ConversationsContext } from "../../context/conversationContext";
 import styles from "./Chat.styles";
 interface ChatProps {
   route: RouteProp<
@@ -20,8 +22,13 @@ interface ChatProps {
 
 export default function Chat(props: ChatProps) {
   const { conversation } = props.route.params;
-  const { getCurrentConversation } = useContext(ConversationsContext);
-  const { messages } = getCurrentConversation();
+  const messages = conversation.messages;
+  // const messages = useSelector((state: ConversationState) =>
+  //   state.currentConversation ? state.currentConversation.messages : []
+  // );
+
+  // const { getCurrentConversation } = useContext(ConversationsContext);
+  // const { messages } = getCurrentConversation();
 
   const whatsappBackgroundImg = "../../assets/images/whatsapp.png";
   const [isTyping, setIsTyping] = useState(false);
