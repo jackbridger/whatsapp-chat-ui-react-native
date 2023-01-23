@@ -5,16 +5,16 @@ import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
 
 import { setCurrentConversation } from "../../redux/conversationsReducer";
-import { ConversationType } from "../../types";
+import { Conversation } from "../../types";
 import styles from "./ConversationPreview.styles";
 import images from "../../assets/index";
 
 interface ConversationPreviewProps {
-  conversation: ConversationType;
+  conversation: Conversation;
 }
 
 interface ChatRouteParams {
-  conversation: ConversationType;
+  conversation: Conversation;
 }
 
 export default function ConversationPreview(props: ConversationPreviewProps) {
@@ -37,13 +37,13 @@ export default function ConversationPreview(props: ConversationPreviewProps) {
       <View style={styles.imgAndMsgSubContainer}>
         <Image style={styles.profileImg} source={profileImg} />
         <View>
-          <Text style={styles.msgTitle}>{conversation.title}</Text>
+          <Text style={styles.msgTitle}>{conversation.name}</Text>
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
             style={styles.msgPreview}
           >
-            {conversation.messages[conversation.messages.length - 1].text}
+            {conversation.messages[conversation.messages.length - 1].message}
           </Text>
         </View>
       </View>

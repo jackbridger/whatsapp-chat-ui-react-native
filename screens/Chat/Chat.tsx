@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 import SendButton from "../../components/SendButton/SendButton";
 import ChatMessages from "../../components/ChatMessages/ChatMessages";
-import { ConversationType } from "../../types";
+import { Conversation } from "../../types";
 import { RootState } from "../../redux/store";
 
 import styles from "./Chat.styles";
@@ -13,7 +13,7 @@ interface ChatProps {
   route: RouteProp<
     {
       params: {
-        conversation: ConversationType;
+        conversation: Conversation;
       };
     },
     "params"

@@ -2,10 +2,10 @@ import { View, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import dayjs from "dayjs";
 
-import { MessageDataType } from "../../types";
+import { MessageData } from "../../types";
 import styles from "./MessageBubble.styles";
 
-export default function MessageBubble(props: MessageDataType) {
+export default function MessageBubble(props: MessageData) {
   const { message } = props;
   const isMyMessage = message.userID === 1;
   const isMessageRead = false;
@@ -31,7 +31,7 @@ export default function MessageBubble(props: MessageDataType) {
           left: isMyMessage ? 0 : 10,
         }}
       >
-        {message.text}
+        {message.message}
       </Text>
       <View
         style={{

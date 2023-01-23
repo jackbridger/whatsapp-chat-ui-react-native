@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 
 import Colors from "../../constants/Colors";
 import useKeyboardOffsetHeight from "../../helpers/useKeyboardOffsetHeight";
-import { ConversationType } from "../../types";
+import { Conversation } from "../../types";
 import { sendMessage } from "../../redux/conversationsReducer";
 import formatMessage from "../../helpers/formatMessage";
 
@@ -43,7 +43,7 @@ interface SendButtonProps {
   isTyping: boolean;
   setHeightOfMessageBox: (height: number) => void;
   heightOfMessageBox: number;
-  thisConversation: ConversationType;
+  thisConversation: Conversation;
 }
 export default function SendButton(props: SendButtonProps) {
   const dispatch = useDispatch();

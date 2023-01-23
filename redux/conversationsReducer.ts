@@ -2,17 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 import startingConversations from "../data/startingConversations";
-import { ConversationType, MessageType } from "../types";
+import { Conversation, Message } from "../types";
 import sortConversations from "../helpers/sortConversations";
+import getAllConversations from "../api/getAllConversations";
+import storage from "@react-native-async-storage/async-storage";
 import { PURGE } from "redux-persist";
 
 export interface ConversationState {
-  conversations: ConversationType[];
-  currentConversation: ConversationType | null;
+  conversations: Conversation[];
+  currentConversation: Conversation | null;
 }
 
 const initialState: ConversationState = {
-  conversations: sortConversations(startingConversations),
+  conversations: [],
   currentConversation: null,
 };
 
@@ -21,14 +23,22 @@ export const conversationsSlice = createSlice({
   initialState,
   reducers: {
     addAllConversations: (
-      state: ConversationState,
-      action: PayloadAction<ConversationType[]>
+      state: ConversationState
+      // action: PayloadAction<ConversationType[]>
     ): void => {
-      state.conversations = sortConversations(action.payload);
+      getAllConversations()
+        .then((result) => {
+          if (result.data) {
+            state.conversations = sortConversations(result.data);
+          } else {
+            console.log("Error retrieving conversations");
+          }
+        })
+        .catch((error) => console.log(error));
     },
     setCurrentConversation: (
       state: ConversationState,
-      action: PayloadAction<ConversationType>
+      action: PayloadAction<Conversation>
     ): void => {
       if (action.payload) {
         state.currentConversation = action.payload;
@@ -37,7 +47,7 @@ export const conversationsSlice = createSlice({
 
     sendMessage: (
       state: ConversationState,
-      action: PayloadAction<MessageType>
+      action: PayloadAction<Message>
     ): void => {
       const message = action.payload;
       const conversationToUpdate = state.conversations.find(
@@ -54,11 +64,11 @@ export const conversationsSlice = createSlice({
       }
       state.conversations = sortConversations(state.conversations);
     },
-    // clearConversations: (builder) => {
-    //   builder.addCase(PURGE, (state) => {
-    //     customEntityAdapter.removeAll(state);
-    //   });
-    // },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, (state) => {
+      storage.removeItem("persist:root");
+    });
   },
 });
 

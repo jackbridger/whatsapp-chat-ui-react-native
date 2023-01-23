@@ -1,13 +1,13 @@
-import { MessageType } from "../types";
+import { Message } from "../types";
 
 export default function formatMessage(
   msg: string,
   userID: number,
   conversationID: string
-): MessageType {
+): Message {
   return {
     id: `${Math.random()}`,
-    text: msg,
+    message: msg,
     userID: userID,
     time: new Date().toString(),
     conversationID: conversationID,

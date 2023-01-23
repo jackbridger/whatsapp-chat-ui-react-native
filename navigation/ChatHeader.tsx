@@ -20,7 +20,7 @@ export default function ChatHeader(props: Props) {
     (state: RootState) => state.conversations.currentConversation
   );
   const id = currentConversation && currentConversation.id;
-  const title = currentConversation && currentConversation.title;
+  const name = currentConversation && currentConversation.name;
   const { navigation } = props;
 
   const profileImg = id && images[id];
@@ -69,7 +69,7 @@ export default function ChatHeader(props: Props) {
             fontWeight: "600",
           }}
         >
-          {title}
+          {name}
         </Text>
       </View>
       <View

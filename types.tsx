@@ -13,7 +13,7 @@ declare global {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  Chat: { conversation: ConversationType };
+  Chat: { conversation: Conversation };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -31,21 +31,22 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
     NativeStackScreenProps<RootStackParamList>
   >;
 
-export type ConversationType = {
+export interface Conversation {
   id: string;
-  messages: MessageType[];
-  users: number[];
-  title: string;
-};
+  messages: Message[];
+  users: string[];
+  name: string;
+  createdAt: string;
+}
 
-export type MessageType = {
-  text: string;
+export interface Message {
+  id: string;
+  message: string;
   time: string;
-  userID: number;
-  id: string;
+  userID: string;
   conversationID: string;
-};
+}
 
-export interface MessageDataType {
-  message: MessageType;
+export interface MessageData {
+  message: Message;
 }
