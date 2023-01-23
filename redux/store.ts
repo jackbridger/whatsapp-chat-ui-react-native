@@ -1,16 +1,39 @@
 import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
-import { persistReducer, persistStore } from "redux-persist";
-// import thunk from "redux-thunk";
+import { combineReducers } from "redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
 import conversationsReducer from "./conversationsReducer";
 
-const persistConfig = {};
+const persistConfig = {
+  key: "root",
+  storage: AsyncStorage,
+  version: 1,
+};
+
+const reducer = combineReducers({
+  conversations: conversationsReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, reducer);
 
 export const store = configureStore({
-  reducer: {
-    conversations: conversationsReducer,
-  },
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

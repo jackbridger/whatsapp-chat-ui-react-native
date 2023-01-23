@@ -4,6 +4,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import startingConversations from "../data/startingConversations";
 import { ConversationType, MessageType } from "../types";
 import sortConversations from "../helpers/sortConversations";
+import { PURGE } from "redux-persist";
 
 export interface ConversationState {
   conversations: ConversationType[];
@@ -53,6 +54,11 @@ export const conversationsSlice = createSlice({
       }
       state.conversations = sortConversations(state.conversations);
     },
+    // clearConversations: (builder) => {
+    //   builder.addCase(PURGE, (state) => {
+    //     customEntityAdapter.removeAll(state);
+    //   });
+    // },
   },
 });
 
