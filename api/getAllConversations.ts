@@ -8,7 +8,7 @@ interface NickConversation {
   id: string;
   name: string;
   messages: NickMessage[];
-  user_owner_id: string;
+  owner_user_id: string;
   created_at: string;
 }
 
@@ -30,7 +30,7 @@ interface MyResponse {
 }
 
 const baseURL =
-  "https://01ea-2a02-c7c-365f-6600-599e-83fb-4542-7257.eu.ngrok.io";
+  "https://8e5b-2a02-c7c-365f-6600-f4cc-f2f8-f217-17b2.eu.ngrok.io";
 
 const userID = "7e1903aa-0839-445e-b041-8325bae7900f";
 const getconversationsURL: string = `${baseURL}/conversations?user_id=${userID}`;
@@ -38,6 +38,7 @@ const getconversationsURL: string = `${baseURL}/conversations?user_id=${userID}`
 const formatConversations = (conversationsResponse: NickConversation[]) => {
   const conversations: Conversation[] = conversationsResponse.map((conv) => {
     const messages = conv.messages.map((msg) => {
+      console.log("conv user id", conv.owner_user_id);
       const formattedMessage: Message = {
         id: msg.id,
         message: msg.message,
@@ -49,9 +50,9 @@ const formatConversations = (conversationsResponse: NickConversation[]) => {
     });
     return {
       id: conv.id,
-      messages,
+      messages: messages ? messages : [],
       name: conv.name,
-      users: [conv.user_owner_id],
+      users: [conv.owner_user_id],
       createdAt: conv.created_at,
     };
   });
@@ -63,7 +64,6 @@ export default async function getAllConversations(): Promise<MyResponse> {
     const response = await fetch(getconversationsURL, requestOptions);
     const result_1 = await response.json();
     const formattedConversations = formatConversations(result_1);
-
     return {
       data: formattedConversations,
       status: response.status,

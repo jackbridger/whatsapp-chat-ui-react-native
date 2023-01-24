@@ -43,7 +43,9 @@ export default function ConversationPreview(props: ConversationPreviewProps) {
             ellipsizeMode="tail"
             style={styles.msgPreview}
           >
-            {conversation.messages[conversation.messages.length - 1].message}
+            {conversation.messages.length > 0
+              ? conversation.messages[conversation.messages.length - 1].message
+              : ""}
           </Text>
         </View>
       </View>
@@ -51,7 +53,9 @@ export default function ConversationPreview(props: ConversationPreviewProps) {
         <View style={styles.msgDataSubContainer}>
           <Text style={styles.timeText}>
             {dayjs(
-              conversation.messages[conversation.messages.length - 1].time
+              conversation.messages.length > 1
+                ? conversation.messages[conversation.messages.length - 1].time
+                : conversation.createdAt
             ).format("HH:mm")}
           </Text>
           <View style={styles.numberOfMsgsContainer}>

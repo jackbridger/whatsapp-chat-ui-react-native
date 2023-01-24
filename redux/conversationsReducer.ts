@@ -23,18 +23,10 @@ export const conversationsSlice = createSlice({
   initialState,
   reducers: {
     addAllConversations: (
-      state: ConversationState
-      // action: PayloadAction<ConversationType[]>
+      state: ConversationState,
+      action: PayloadAction<Conversation[]>
     ): void => {
-      getAllConversations()
-        .then((result) => {
-          if (result.data) {
-            state.conversations = sortConversations(result.data);
-          } else {
-            console.log("Error retrieving conversations");
-          }
-        })
-        .catch((error) => console.log(error));
+      state.conversations = sortConversations(action.payload);
     },
     setCurrentConversation: (
       state: ConversationState,

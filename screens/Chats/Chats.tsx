@@ -7,6 +7,7 @@ import ConversationPreview from "../../components/ConversationPreview/Conversati
 import { Conversation, RootTabScreenProps } from "../../types";
 import type { RootState } from "../../redux/store";
 import { addAllConversations } from "../../redux/conversationsReducer";
+import getAllConversations from "../../api/getAllConversations";
 import styles from "./Chats.styles";
 
 interface ConversationItemProps {
@@ -15,7 +16,12 @@ interface ConversationItemProps {
 export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(addAllConversations());
+    getAllConversations().then((res) => {
+      const conversations = res.data;
+      if (conversations) {
+        dispatch(addAllConversations(conversations));
+      }
+    });
   }, []);
 
   const conversations = useSelector(
