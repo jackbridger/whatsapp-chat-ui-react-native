@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import startingConversations from "../data/startingConversations";
 import { Conversation, Message } from "../types";
 import sortConversations from "../helpers/sortConversations";
-import getAllConversations from "../api/getAllConversations";
 import storage from "@react-native-async-storage/async-storage";
 import { PURGE } from "redux-persist";
 

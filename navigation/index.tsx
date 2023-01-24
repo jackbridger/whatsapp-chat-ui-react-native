@@ -5,9 +5,11 @@ import * as React from "react";
 import TopTabNavigator from "./TopTabNavigator";
 import Colors from "../constants/Colors";
 import Chat from "../screens/Chat/Chat";
+import CreateNewChat from "../screens/CreateNewChat/CreateNewChat";
 
 import { RootStackParamList } from "../types";
 import ChatHeader from "./ChatHeader";
+import CreateChatHeader from "./CreateChatHeader";
 
 export default function Navigation() {
   return (
@@ -47,6 +49,19 @@ function RootNavigator() {
             backgroundColor: Colors.light.darkGreen,
           },
           header: ({ navigation }) => <ChatHeader navigation={navigation} />,
+        }}
+      />
+      <Stack.Screen
+        name="CreateNewChat"
+        component={CreateNewChat}
+        options={{
+          headerBackTitle: "",
+          headerStyle: {
+            backgroundColor: Colors.light.darkGreen,
+          },
+          header: ({ navigation }) => (
+            <CreateChatHeader navigation={navigation} />
+          ),
         }}
       />
     </Stack.Navigator>

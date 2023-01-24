@@ -2,7 +2,6 @@ import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
-  persistStore,
   persistReducer,
   FLUSH,
   REHYDRATE,
@@ -13,6 +12,7 @@ import {
 } from "redux-persist";
 
 import conversationsReducer from "./conversationsReducer";
+import usersReducer from "./usersReducer";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +22,7 @@ const persistConfig = {
 
 const reducer = combineReducers({
   conversations: conversationsReducer,
+  users: usersReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

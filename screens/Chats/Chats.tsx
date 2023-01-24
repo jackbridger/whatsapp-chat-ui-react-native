@@ -11,6 +11,7 @@ import { addAllConversations } from "../../redux/conversationsReducer";
 import getAllConversations from "../../api/getAllConversations";
 import styles from "./Chats.styles";
 import Colors from "../../constants/Colors";
+import { useNavigation } from "@react-navigation/native";
 
 interface ConversationItemProps {
   item: Conversation;
@@ -29,7 +30,6 @@ export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
   const conversations = useSelector(
     (state: RootState) => state.conversations.conversations
   );
-  console.log(conversations);
 
   const renderConversationPreview = (props: ConversationItemProps) => {
     const { item } = props;
@@ -66,9 +66,10 @@ const fadeOut = () => {
 };
 
 const CreateConversationButton = () => {
+  const navigation = useNavigation();
   const _onPressIn = () => {
     fadeIn();
-    console.log("pressed");
+    navigation.navigate("CreateNewChat");
   };
 
   return (

@@ -14,6 +14,7 @@ declare global {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Chat: { conversation: Conversation };
+  CreateNewChat: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -49,4 +50,15 @@ export interface Message {
 
 export interface MessageData {
   message: Message;
+}
+
+export interface User {
+  id: string;
+  username: string;
+  createdAt: string;
+}
+export interface NickUser {
+  id: string;
+  username: string;
+  created_at: string;
 }

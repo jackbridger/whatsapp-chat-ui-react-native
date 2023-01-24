@@ -6,6 +6,7 @@ const images: {
   "103": require("./images/103.jpeg"),
   "104": require("./images/104.jpeg"),
   "105": require("./images/105.jpeg"),
+  blank: require("./images/blank.jpeg"),
 };
 
 export default images;

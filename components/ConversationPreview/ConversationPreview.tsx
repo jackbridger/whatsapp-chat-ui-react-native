@@ -21,7 +21,8 @@ export default function ConversationPreview(props: ConversationPreviewProps) {
   const { conversation } = props;
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const profileImg = images[conversation.id];
+  // const profileImg = images[conversation.id];
+  const profileImg = images["blank"];
 
   const chatRouteParams: ChatRouteParams = {
     conversation,

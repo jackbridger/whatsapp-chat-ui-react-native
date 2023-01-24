@@ -30,7 +30,7 @@ interface MyResponse {
 }
 
 const baseURL =
-  "https://8e5b-2a02-c7c-365f-6600-f4cc-f2f8-f217-17b2.eu.ngrok.io";
+  "https://6d6b-2a02-c7c-365f-6600-605a-fab1-5972-2093.eu.ngrok.io";
 
 const userID = "7e1903aa-0839-445e-b041-8325bae7900f";
 const getconversationsURL: string = `${baseURL}/conversations?user_id=${userID}`;
@@ -38,7 +38,6 @@ const getconversationsURL: string = `${baseURL}/conversations?user_id=${userID}`
 const formatConversations = (conversationsResponse: NickConversation[]) => {
   const conversations: Conversation[] = conversationsResponse.map((conv) => {
     const messages = conv.messages.map((msg) => {
-      console.log("conv user id", conv.owner_user_id);
       const formattedMessage: Message = {
         id: msg.id,
         message: msg.message,
