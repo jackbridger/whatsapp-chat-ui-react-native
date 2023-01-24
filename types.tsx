@@ -62,3 +62,20 @@ export interface NickUser {
   username: string;
   created_at: string;
 }
+interface NickMessage {
+  id: string;
+  conversation_id: string;
+  users: {
+    id: string;
+    username: string;
+  };
+  message: string;
+  created_at: string;
+}
+export interface NickConversation {
+  id: string;
+  name: string;
+  messages: NickMessage[];
+  owner_user_id: string;
+  created_at: string;
+}

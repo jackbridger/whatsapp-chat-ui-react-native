@@ -1,4 +1,5 @@
 import { Conversation, Message } from "../types";
+import formatConversations from "../helpers/formatConversations";
 
 const requestOptions: RequestInit = {
   method: "GET",
@@ -30,33 +31,10 @@ interface MyResponse {
 }
 
 const baseURL =
-  "https://6d6b-2a02-c7c-365f-6600-605a-fab1-5972-2093.eu.ngrok.io";
+  "https://2082-2a02-c7c-365f-6600-605a-fab1-5972-2093.eu.ngrok.io";
 
-const userID = "7e1903aa-0839-445e-b041-8325bae7900f";
+const userID = "bf6e83b9-926c-4dbd-bf26-5f88118e887f";
 const getconversationsURL: string = `${baseURL}/conversations?user_id=${userID}`;
-
-const formatConversations = (conversationsResponse: NickConversation[]) => {
-  const conversations: Conversation[] = conversationsResponse.map((conv) => {
-    const messages = conv.messages.map((msg) => {
-      const formattedMessage: Message = {
-        id: msg.id,
-        message: msg.message,
-        time: msg.created_at,
-        userID: msg.users.id,
-        conversationID: msg.conversation_id,
-      };
-      return formattedMessage;
-    });
-    return {
-      id: conv.id,
-      messages: messages ? messages : [],
-      name: conv.name,
-      users: [conv.owner_user_id],
-      createdAt: conv.created_at,
-    };
-  });
-  return conversations;
-};
 
 export default async function getAllConversations(): Promise<MyResponse> {
   try {

@@ -2,7 +2,7 @@ import { Message } from "../types";
 
 export default function formatMessage(
   msg: string,
-  userID: number,
+  userID: string,
   conversationID: string
 ): Message {
   return {

@@ -3,11 +3,16 @@ import { useNavigation } from "@react-navigation/native";
 import { useContext } from "react";
 import { useDispatch } from "react-redux";
 
-import { setCurrentConversation } from "../../redux/conversationsReducer";
-import { Conversation } from "../../types";
+import {
+  addNewConversation,
+  setCurrentConversation,
+} from "../../redux/conversationsReducer";
+
 import styles from "./UserPreview.styles";
 import images from "../../assets/index";
-import { User } from "../../types";
+import { User, Conversation, NickConversation } from "../../types";
+import createConversation from "../../api/createConversation";
+import formatConversation from "../../helpers/formatConversation";
 
 interface UserPreviewProps {
   user: User;
@@ -23,13 +28,16 @@ export default function UserPreview(props: UserPreviewProps) {
   const navigation = useNavigation();
   const profileImg = images["blank"];
 
-  //   const chatRouteParams: ChatRouteParams = {
-  //     conversation,
-  //   };
-
   const _onPress = () => {
-    // dispatch(setCurrentConversation(conversation));
-    // navigation.navigate("Chat", chatRouteParams);
+    const userID = "bf6e83b9-926c-4dbd-bf26-5f88118e887f";
+    createConversation([user.id, userID], user.username, user.id).then(
+      (conversation) => {
+        const formattedConversation = formatConversation(conversation);
+        dispatch(setCurrentConversation(formattedConversation));
+        dispatch(addNewConversation(formattedConversation));
+        navigation.navigate("Chat", { conversation: formattedConversation });
+      }
+    );
   };
 
   return (

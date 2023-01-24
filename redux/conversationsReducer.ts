@@ -34,6 +34,18 @@ export const conversationsSlice = createSlice({
         state.currentConversation = action.payload;
       }
     },
+    addNewConversation: (
+      state: ConversationState,
+      action: PayloadAction<Conversation>
+    ): void => {
+      if (action.payload) {
+        state.conversations = sortConversations([
+          ...state.conversations,
+          action.payload,
+        ]);
+      }
+    },
+
     sendMessage: (
       state: ConversationState,
       action: PayloadAction<Message>
@@ -62,7 +74,11 @@ export const conversationsSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addAllConversations, sendMessage, setCurrentConversation } =
-  conversationsSlice.actions;
+export const {
+  addAllConversations,
+  sendMessage,
+  setCurrentConversation,
+  addNewConversation,
+} = conversationsSlice.actions;
 
 export default conversationsSlice.reducer;
