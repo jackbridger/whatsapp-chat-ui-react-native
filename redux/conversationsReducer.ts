@@ -36,7 +36,6 @@ export const conversationsSlice = createSlice({
         state.currentConversation = action.payload;
       }
     },
-
     sendMessage: (
       state: ConversationState,
       action: PayloadAction<Message>

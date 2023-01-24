@@ -37,6 +37,7 @@ function _prepMessage(
 }
 
 import styles from "./SendButton.styles";
+import addNewMessage from "../../api/addNewMessage";
 
 interface SendButtonProps {
   setIsTyping: (isTyping: boolean) => void;
@@ -53,7 +54,7 @@ export default function SendButton(props: SendButtonProps) {
   const [newMsg, setNewMsg] = useState("");
   const ref = useRef<TransitioningView | null>(null);
   const keyBoardOffsetHeight = useKeyboardOffsetHeight();
-  const userID = 2;
+  const userID = "bf6e83b9-926c-4dbd-bf26-5f88118e887f";
 
   const windowHeight = Dimensions.get("window").height;
 
@@ -131,7 +132,10 @@ export default function SendButton(props: SendButtonProps) {
                 setIsTyping
               );
               if (message) {
-                dispatch(sendMessage(message));
+                addNewMessage(message).then((res) => {
+                  console.log(res);
+                  dispatch(sendMessage(message));
+                });
               }
             }}
           >
