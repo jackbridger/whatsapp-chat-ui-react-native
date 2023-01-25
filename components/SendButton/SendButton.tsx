@@ -18,7 +18,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Colors from "../../constants/Colors";
 import useKeyboardOffsetHeight from "../../helpers/useKeyboardOffsetHeight";
 import { Conversation } from "../../types";
-import { sendMessage } from "../../redux/conversationsReducer";
+import {
+  sendMessage,
+  markConversationAsRead,
+} from "../../redux/conversationsReducer";
 import formatMessage from "../../helpers/formatMessage";
 import type { RootState } from "../../redux/store";
 
@@ -56,6 +59,9 @@ export default function SendButton(props: SendButtonProps) {
   const whatsappBackgroundImg = "../../assets/images/whatsapp.png";
   const { setIsTyping, isTyping, setHeightOfMessageBox, thisConversation } =
     props;
+  const hasUnreadMessages =
+    thisConversation.messages.length > 0 &&
+    !thisConversation.messages[thisConversation.messages.length - 1].isRead;
   const [newMsg, setNewMsg] = useState("");
   const ref = useRef<TransitioningView | null>(null);
   const keyBoardOffsetHeight = useKeyboardOffsetHeight();
@@ -141,7 +147,10 @@ export default function SendButton(props: SendButtonProps) {
                 );
                 if (message) {
                   dispatch(sendMessage(message));
-                  addNewMessage(message);
+                  if (!hasUnreadMessages) {
+                    console.log("dispatching markConversationAsRead");
+                    dispatch(markConversationAsRead(thisConversation));
+                  }
                 }
               }
             }}
