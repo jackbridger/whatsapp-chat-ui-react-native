@@ -21,9 +21,11 @@ export default function ChatHeader(props: Props) {
   );
   const id = currentConversation && currentConversation.id;
   const name = currentConversation && currentConversation.name;
+  const randomProfilePic =
+    currentConversation && currentConversation.randomProfilePicture;
   const { navigation } = props;
 
-  const profileImg = id && images[id];
+  const profileImg = images[randomProfilePic ? randomProfilePic : 0];
 
   return (
     <View

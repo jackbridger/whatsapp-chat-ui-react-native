@@ -1,4 +1,7 @@
 import { Conversation, NickConversation, Message } from "../types";
+
+const randomIntBetweenOneAndFour = Math.floor(Math.random() * 5);
+
 export default function formatConversations(
   conversationsResponse: NickConversation[]
 ): Conversation[] {
@@ -11,6 +14,7 @@ export default function formatConversations(
             time: msg.created_at,
             userID: msg.users.id,
             conversationID: msg.conversation_id,
+            isRead: false,
           };
           return formattedMessage;
         })
@@ -21,6 +25,7 @@ export default function formatConversations(
       name: conv.name,
       users: [conv.owner_user_id],
       createdAt: conv.created_at,
+      randomProfilePicture: randomIntBetweenOneAndFour,
     };
   });
   return conversations;

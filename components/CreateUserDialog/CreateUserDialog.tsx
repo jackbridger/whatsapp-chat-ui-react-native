@@ -25,7 +25,7 @@ export default function CreateUserDialog({
   return (
     <View>
       <Dialog.Container visible={visible}>
-        <Dialog.Title>Set username</Dialog.Title>
+        <Dialog.Title>Set name</Dialog.Title>
         <Dialog.Input
           label="username"
           onChangeText={(_username: string) => setUsername(_username)}

@@ -30,7 +30,7 @@ export default StyleSheet.create({
   },
   msgPreview: {
     color: Colors.light.offBlack,
-    width: "80%",
+    width: "75%",
   },
   msgDataContainer: {
     flexDirection: "row",
@@ -40,9 +40,7 @@ export default StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
   },
-  timeText: {
-    color: Colors.light.brightGreen,
-  },
+
   numberOfMsgsContainer: {
     backgroundColor: Colors.light.brightGreen,
     height: 20,

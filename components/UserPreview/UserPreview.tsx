@@ -8,10 +8,10 @@ import {
 } from "../../redux/conversationsReducer";
 
 import styles from "./UserPreview.styles";
-import images from "../../assets/index";
 import { User, Conversation } from "../../types";
 import createConversation from "../../api/createConversation";
 import formatConversation from "../../helpers/formatConversation";
+import images from "../../assets/index";
 
 interface UserPreviewProps {
   user: User;
@@ -25,7 +25,7 @@ export default function UserPreview(props: UserPreviewProps) {
   const { user } = props;
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const profileImg = images["blank"];
+  const profileImg = images[0];
 
   const _onPress = () => {
     const userID = "bf6e83b9-926c-4dbd-bf26-5f88118e887f";

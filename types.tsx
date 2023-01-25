@@ -38,6 +38,7 @@ export interface Conversation {
   users: string[];
   name: string;
   createdAt: string;
+  randomProfilePicture: number;
 }
 
 export interface Message {
@@ -46,6 +47,7 @@ export interface Message {
   time: string;
   userID: string;
   conversationID: string;
+  isRead: boolean;
 }
 
 export interface MessageData {

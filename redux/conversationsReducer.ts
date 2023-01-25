@@ -45,7 +45,21 @@ export const conversationsSlice = createSlice({
         ]);
       }
     },
-
+    markConversationAsRead: (
+      state: ConversationState,
+      action: PayloadAction<Conversation>
+    ): void => {
+      if (action.payload) {
+        const conversationToUpdate = state.conversations.find(
+          (conversation) => conversation.id === action.payload.id
+        );
+        if (conversationToUpdate) {
+          conversationToUpdate.messages.forEach((message) => {
+            message.isRead = true;
+          });
+        }
+      }
+    },
     sendMessage: (
       state: ConversationState,
       action: PayloadAction<Message>
@@ -79,6 +93,7 @@ export const {
   sendMessage,
   setCurrentConversation,
   addNewConversation,
+  markConversationAsRead,
 } = conversationsSlice.actions;
 
 export default conversationsSlice.reducer;
