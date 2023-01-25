@@ -3,28 +3,40 @@ import { FlashList } from "@shopify/flash-list";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
+import { useState } from "react";
 
 import ConversationPreview from "../../components/ConversationPreview/ConversationPreview";
-import { Conversation, RootTabScreenProps } from "../../types";
+import { Conversation, RootTabScreenProps, User } from "../../types";
 import type { RootState } from "../../redux/store";
 import { addAllConversations } from "../../redux/conversationsReducer";
+import { setCurrentUser } from "../../redux/usersReducer";
 import getAllConversations from "../../api/getAllConversations";
 import styles from "./Chats.styles";
 import Colors from "../../constants/Colors";
 import { useNavigation } from "@react-navigation/native";
+import createUser from "../../api/createUser";
+import CreateUserDialog from "../../components/CreateUserDialog/CreateUserDialog";
 
 interface ConversationItemProps {
   item: Conversation;
 }
 export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
+  const [showUserDialog, setShowUserDialog] = useState<boolean>(false);
+
   const dispatch = useDispatch();
+  const currentUser = useSelector(
+    (state: RootState) => state.users.currentUser
+  );
   useEffect(() => {
-    getAllConversations().then((res) => {
-      const conversations = res.data;
-      if (conversations) {
-        dispatch(addAllConversations(conversations));
-      }
-    });
+    if (!currentUser) {
+      setShowUserDialog(true);
+    } else if (currentUser)
+      getAllConversations(currentUser.id).then((res) => {
+        const conversations = res.data;
+        if (conversations) {
+          dispatch(addAllConversations(conversations));
+        }
+      });
   }, []);
 
   const conversations = useSelector(
@@ -38,6 +50,10 @@ export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
   };
   return (
     <View style={styles.mainContainer}>
+      <CreateUserDialog
+        visible={showUserDialog}
+        setShowUserDialog={setShowUserDialog}
+      />
       <FlashList
         data={conversations}
         renderItem={renderConversationPreview}

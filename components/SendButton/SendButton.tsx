@@ -4,6 +4,7 @@ import {
   Pressable,
   ImageBackground,
   Dimensions,
+  Alert,
 } from "react-native";
 import { useState, useRef, useContext } from "react";
 import {
@@ -12,18 +13,19 @@ import {
   TransitioningView,
 } from "react-native-reanimated";
 import { Entypo, FontAwesome5, Ionicons } from "@expo/vector-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Colors from "../../constants/Colors";
 import useKeyboardOffsetHeight from "../../helpers/useKeyboardOffsetHeight";
 import { Conversation } from "../../types";
 import { sendMessage } from "../../redux/conversationsReducer";
 import formatMessage from "../../helpers/formatMessage";
+import type { RootState } from "../../redux/store";
 
 function _prepMessage(
   newMsg: string,
   thisConversationID: string,
-  userID: number,
+  userID: string,
   setNewMsg: (msg: string) => void,
   isTyping: boolean,
   setIsTyping: (isTyping: boolean) => void
@@ -48,13 +50,16 @@ interface SendButtonProps {
 }
 export default function SendButton(props: SendButtonProps) {
   const dispatch = useDispatch();
+  const currentUser = useSelector(
+    (state: RootState) => state.users.currentUser
+  );
   const whatsappBackgroundImg = "../../assets/images/whatsapp.png";
   const { setIsTyping, isTyping, setHeightOfMessageBox, thisConversation } =
     props;
   const [newMsg, setNewMsg] = useState("");
   const ref = useRef<TransitioningView | null>(null);
   const keyBoardOffsetHeight = useKeyboardOffsetHeight();
-  const userID = "bf6e83b9-926c-4dbd-bf26-5f88118e887f";
+  const userID = currentUser?.id;
 
   const windowHeight = Dimensions.get("window").height;
 
@@ -123,19 +128,22 @@ export default function SendButton(props: SendButtonProps) {
           <Pressable
             style={styles.voiceButton}
             onPress={() => {
-              const message = _prepMessage(
-                newMsg,
-                thisConversation.id,
-                userID,
-                setNewMsg,
-                isTyping,
-                setIsTyping
-              );
-              if (message) {
-                addNewMessage(message).then((res) => {
-                  console.log(res);
+              if (!userID) {
+                console.log("userID is null");
+                Alert.alert("user id is null");
+              } else {
+                const message = _prepMessage(
+                  newMsg,
+                  thisConversation.id,
+                  userID,
+                  setNewMsg,
+                  isTyping,
+                  setIsTyping
+                );
+                if (message) {
                   dispatch(sendMessage(message));
-                });
+                  addNewMessage(message);
+                }
               }
             }}
           >

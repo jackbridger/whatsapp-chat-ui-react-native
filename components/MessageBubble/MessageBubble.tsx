@@ -1,13 +1,18 @@
 import { View, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import dayjs from "dayjs";
+import { useSelector } from "react-redux";
 
 import { MessageData } from "../../types";
 import styles from "./MessageBubble.styles";
+import { RootState } from "../../redux/store";
 
 export default function MessageBubble(props: MessageData) {
+  const currentUser = useSelector(
+    (state: RootState) => state.users.currentUser
+  );
   const { message } = props;
-  const isMyMessage = message.userID === 1;
+  const isMyMessage = message.userID === currentUser?.id;
   const isMessageRead = false;
   return (
     <View

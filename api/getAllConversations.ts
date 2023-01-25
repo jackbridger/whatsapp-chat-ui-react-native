@@ -1,5 +1,6 @@
 import { Conversation, Message } from "../types";
 import formatConversations from "../helpers/formatConversations";
+import ngrokURL from "../constants/ngrokURL";
 
 const requestOptions: RequestInit = {
   method: "GET",
@@ -30,14 +31,13 @@ interface MyResponse {
   message: string;
 }
 
-const baseURL =
-  "https://2082-2a02-c7c-365f-6600-605a-fab1-5972-2093.eu.ngrok.io";
+const baseURL = ngrokURL;
 
-const userID = "bf6e83b9-926c-4dbd-bf26-5f88118e887f";
-const getconversationsURL: string = `${baseURL}/conversations?user_id=${userID}`;
-
-export default async function getAllConversations(): Promise<MyResponse> {
+export default async function getAllConversations(
+  userID: string
+): Promise<MyResponse> {
   try {
+    const getconversationsURL: string = `${baseURL}/conversations?user_id=${userID}`;
     const response = await fetch(getconversationsURL, requestOptions);
     const result_1 = await response.json();
     const formattedConversations = formatConversations(result_1);

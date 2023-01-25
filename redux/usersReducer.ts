@@ -22,6 +22,9 @@ export const usersSlice = createSlice({
     addAllUsers: (state: UserState, action: PayloadAction<User[]>): void => {
       state.users = action.payload;
     },
+    setCurrentUser: (state: UserState, action: PayloadAction<User>): void => {
+      state.currentUser = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(PURGE, (state) => {
@@ -31,6 +34,6 @@ export const usersSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addAllUsers } = usersSlice.actions;
+export const { addAllUsers, setCurrentUser } = usersSlice.actions;
 
 export default usersSlice.reducer;

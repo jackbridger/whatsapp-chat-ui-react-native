@@ -1,4 +1,5 @@
 import { NickUser, User } from "../types";
+import ngrokURL from "../constants/ngrokURL";
 
 export default async function (userID: string): Promise<User[]> {
   const requestOptions: RequestInit = {
@@ -6,8 +7,7 @@ export default async function (userID: string): Promise<User[]> {
     redirect: "follow",
   };
   try {
-    const baseURL =
-      "https://2082-2a02-c7c-365f-6600-605a-fab1-5972-2093.eu.ngrok.io";
+    const baseURL = ngrokURL;
     const getConversationsURL: string = `${baseURL}/users/search?user_id=${userID}&q=n`;
     const response = await fetch(getConversationsURL, requestOptions);
     const data = await response.json();
