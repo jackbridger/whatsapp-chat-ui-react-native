@@ -12,28 +12,30 @@ export default function MessageBubble(props: MessageData) {
     (state: RootState) => state.users.currentUser
   );
   const { message } = props;
+  console.log("my user id is  " + currentUser?.id);
+  console.log("message user id is " + message.userID);
   const isMyMessage = message.userID === currentUser?.id;
   const isMessageRead = false;
   return (
     <View
       style={{
         ...styles.messageContainer,
-        alignSelf: isMyMessage ? "flex-start" : "flex-end",
-        backgroundColor: isMyMessage ? "#fcfcfc" : "#dfffc7",
-        borderTopLeftRadius: isMyMessage ? 0 : 5,
-        borderTopRightRadius: isMyMessage ? 5 : 0,
+        alignSelf: isMyMessage ? "flex-end" : "flex-start",
+        backgroundColor: isMyMessage ? "#dfffc7" : "#fcfcfc",
+        borderTopLeftRadius: isMyMessage ? 5 : 0,
+        borderTopRightRadius: isMyMessage ? 0 : 5,
       }}
     >
       <View
         style={{
           ...styles.leftMessageArrow,
-          display: isMyMessage ? "flex" : "none",
+          display: isMyMessage ? "none" : "flex",
         }}
       ></View>
       <Text
         style={{
           ...styles.messageText,
-          left: isMyMessage ? 0 : 10,
+          left: isMyMessage ? 10 : 0,
         }}
       >
         {message.message}
@@ -41,7 +43,7 @@ export default function MessageBubble(props: MessageData) {
       <View
         style={{
           ...styles.timeAndReadContainer,
-          left: isMyMessage ? 0 : 10,
+          left: isMyMessage ? 10 : 0,
         }}
       >
         <Text style={styles.timeText}>
@@ -57,7 +59,7 @@ export default function MessageBubble(props: MessageData) {
         <View
           style={{
             ...styles.rightMsgArrow,
-            display: isMyMessage ? "none" : "flex",
+            display: isMyMessage ? "flex" : "none",
           }}
         ></View>
       </View>
