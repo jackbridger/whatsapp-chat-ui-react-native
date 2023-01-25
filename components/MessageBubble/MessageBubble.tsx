@@ -12,8 +12,7 @@ export default function MessageBubble(props: MessageData) {
     (state: RootState) => state.users.currentUser
   );
   const { message } = props;
-  console.log("my user id is  " + currentUser?.id);
-  console.log("message user id is " + message.userID);
+
   const isMyMessage = message.userID === currentUser?.id;
   const isMessageRead = false;
   return (

@@ -129,7 +129,6 @@ export default function SendButton(props: SendButtonProps) {
             style={styles.voiceButton}
             onPress={() => {
               if (!userID) {
-                console.log("userID is null");
                 Alert.alert("user id is null");
               } else {
                 const message = _prepMessage(

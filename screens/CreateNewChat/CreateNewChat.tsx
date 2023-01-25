@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FlashList } from "@shopify/flash-list";
@@ -12,7 +12,6 @@ import Colors from "../../constants/Colors";
 import UserPreview from "../../components/UserPreview/UserPreview";
 
 const renderUser = (props: { item: User }) => {
-  console.log("rendering something ");
   const { item } = props;
   return <UserPreview user={item} />;
 };

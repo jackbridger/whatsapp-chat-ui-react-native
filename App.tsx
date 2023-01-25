@@ -5,6 +5,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 
 const persistor = persistStore(store);
+// use this to clear out all the data
 // persistor.purge();
 
 import Navigation from "./navigation";

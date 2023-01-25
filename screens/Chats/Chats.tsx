@@ -2,7 +2,7 @@ import { View, Pressable, Animated } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
 import ConversationPreview from "../../components/ConversationPreview/ConversationPreview";
@@ -14,7 +14,6 @@ import getAllConversations from "../../api/getAllConversations";
 import styles from "./Chats.styles";
 import Colors from "../../constants/Colors";
 import { useNavigation } from "@react-navigation/native";
-import createUser from "../../api/createUser";
 import CreateUserDialog from "../../components/CreateUserDialog/CreateUserDialog";
 
 interface ConversationItemProps {

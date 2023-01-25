@@ -18,10 +18,8 @@ export default async function createUser(username: string): Promise<User> {
     redirect: "follow",
   };
   try {
-    console.log("about to create user");
     const res = await fetch(createUserURL, requestOptions);
     const resjson: NickUser = await res.json();
-    console.log("created user", resjson);
     const newUser: User = {
       id: resjson.id,
       username: resjson.username,

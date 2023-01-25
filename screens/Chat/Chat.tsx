@@ -1,5 +1,5 @@
 import { View, ImageBackground, Text } from "react-native";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { RouteProp } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 

@@ -2,8 +2,6 @@ import { Conversation, NickConversation, Message } from "../types";
 export default function formatConversation(
   conversationsResponse: NickConversation
 ): Conversation {
-  console.log("conversationsResponse");
-  console.log(conversationsResponse);
   const messages = conversationsResponse.messages
     ? conversationsResponse.messages.map((msg) => {
         const formattedMessage: Message = {

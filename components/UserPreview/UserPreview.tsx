@@ -1,6 +1,5 @@
 import { Image, Text, View, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { useContext } from "react";
+import { useNavigation, CommonActions } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 
 import {
@@ -10,7 +9,7 @@ import {
 
 import styles from "./UserPreview.styles";
 import images from "../../assets/index";
-import { User, Conversation, NickConversation } from "../../types";
+import { User, Conversation } from "../../types";
 import createConversation from "../../api/createConversation";
 import formatConversation from "../../helpers/formatConversation";
 
@@ -35,7 +34,23 @@ export default function UserPreview(props: UserPreviewProps) {
         const formattedConversation = formatConversation(conversation);
         dispatch(setCurrentConversation(formattedConversation));
         dispatch(addNewConversation(formattedConversation));
-        navigation.navigate("Chat", { conversation: formattedConversation });
+
+        navigation.dispatch((state) => {
+          const routes = state.routes.filter((r) => r.name !== "CreateNewChat");
+          const chatRoute = {
+            name: "Chat",
+            params: { conversation: formattedConversation },
+            path: undefined,
+          };
+          const newRoutes = [...routes, chatRoute];
+          return CommonActions.reset({
+            ...state,
+            routes: newRoutes,
+            index: newRoutes.length - 1,
+          });
+        });
+
+        // navigation.navigate("Chat", { conversation: formattedConversation });
       }
     );
   };

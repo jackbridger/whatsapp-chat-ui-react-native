@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../redux/usersReducer";
 import { User } from "../../types";
 import createUser from "../../api/createUser";
-import Navigation from "../../navigation";
 
 export default function CreateUserDialog({
   visible,
@@ -19,7 +18,6 @@ export default function CreateUserDialog({
   const [username, setUsername] = useState<string>("");
 
   const _createUser = async () => {
-    console.log("Create user with username: " + username);
     const user: User = await createUser(username);
     dispatch(setCurrentUser(user));
     setShowUserDialog(false);
