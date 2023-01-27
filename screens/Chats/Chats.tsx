@@ -43,7 +43,6 @@ export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
 
   const renderConversationPreview = (props: ConversationItemProps) => {
     const { item } = props;
-
     return <ConversationPreview key={item.id} conversation={item} />;
   };
   return (
@@ -53,6 +52,7 @@ export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
         setShowUserDialog={setShowUserDialog}
       />
       <FlashList
+        extraData={conversations}
         data={conversations}
         renderItem={renderConversationPreview}
         keyExtractor={(item) => item.id}

@@ -9,6 +9,7 @@ export default async function createConversation(
   ownerID: string
 ) {
   const uniqueparticipantIDs = [...new Set([...participantIDs, ownerID])];
+
   const raw = JSON.stringify({
     owner_id: ownerID,
     group_name: groupName,
@@ -26,6 +27,7 @@ export default async function createConversation(
   try {
     const res = await fetch(createConversationURL, requestOptions);
     const data = await res.json();
+
     return data;
   } catch (err) {
     console.log(err);

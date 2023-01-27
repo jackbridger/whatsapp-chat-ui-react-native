@@ -39,10 +39,15 @@ export const conversationsSlice = createSlice({
       action: PayloadAction<Conversation>
     ): void => {
       if (action.payload) {
-        state.conversations = sortConversations([
-          ...state.conversations,
-          action.payload,
-        ]);
+        const conversationAlreadyExists = state.conversations.find(
+          (conv) => conv.id === action.payload.id
+        );
+        if (!conversationAlreadyExists) {
+          state.conversations = sortConversations([
+            ...state.conversations,
+            action.payload,
+          ]);
+        }
       }
     },
     markConversationAsRead: (

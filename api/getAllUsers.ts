@@ -8,7 +8,7 @@ export default async function (userID: string): Promise<User[]> {
   };
   try {
     const baseURL = ngrokURL;
-    const getUsersURL: string = `${baseURL}/users/search?user_id=${userID}&q=n`;
+    const getUsersURL: string = `${baseURL}/users/search?user_id=${userID}`;
     const response = await fetch(getUsersURL, requestOptions);
     const data = await response.json();
     const formattedData: User[] = data.map((user: SupabaseUser) => {
@@ -18,6 +18,7 @@ export default async function (userID: string): Promise<User[]> {
         createdAt: user.created_at,
       };
     });
+
     return formattedData;
   } catch (err) {
     console.log(err);

@@ -39,6 +39,7 @@ export interface Conversation {
   name: string;
   createdAt: string;
   randomProfilePicture: number;
+  participants: User[];
 }
 
 export interface Message {
@@ -80,6 +81,7 @@ export interface SupabaseConversation {
   messages: SupabaseMessage[];
   owner_user_id: string;
   created_at: string;
+  participants: SupabaseUser[];
 }
 
 export interface MyResponse {

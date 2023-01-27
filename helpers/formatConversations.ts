@@ -26,6 +26,11 @@ export default function formatConversations(
       users: [conv.owner_user_id],
       createdAt: conv.created_at,
       randomProfilePicture: randomIntBetweenOneAndFour,
+      participants: conv.participants.map((user) => ({
+        id: user.id,
+        username: user.username,
+        createdAt: user.created_at,
+      })),
     };
   });
   return conversations;

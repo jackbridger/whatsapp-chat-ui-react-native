@@ -73,7 +73,7 @@ export default function ConversationPreview(props: ConversationPreviewProps) {
           </Text>
           {hasUnreadMessages && (
             <View style={styles.numberOfMsgsContainer}>
-              <Text style={styles.numberOfMsgsText}>2</Text>
+              <Text style={styles.numberOfMsgsText}>1</Text>
             </View>
           )}
         </View>

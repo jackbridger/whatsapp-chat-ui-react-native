@@ -18,12 +18,16 @@ const renderUser = (props: { item: User }) => {
 
 export default function CreateNewChat() {
   const allUsers = useSelector((state: RootState) => state.users.users);
-
+  const currentUser = useSelector(
+    (state: RootState) => state.users.currentUser
+  );
   const dispatch = useDispatch();
   useEffect(() => {
-    getAllUsers("8fec886e-5b50-49fe-9741-8ea11e370c2d").then((users) => {
-      dispatch(addAllUsers(users));
-    });
+    if (currentUser) {
+      getAllUsers(currentUser.id).then((users) => {
+        dispatch(addAllUsers(users));
+      });
+    }
   }, []);
 
   return (

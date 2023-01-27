@@ -25,5 +25,10 @@ export default function formatConversation(
     users: [conversationsResponse.owner_user_id],
     createdAt: conversationsResponse.created_at,
     randomProfilePicture: randomIntBetweenOneAndFour,
+    participants: conversationsResponse.participants.map((user) => ({
+      id: user.id,
+      username: user.username,
+      createdAt: user.created_at,
+    })),
   };
 }
