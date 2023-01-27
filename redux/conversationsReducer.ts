@@ -77,7 +77,9 @@ export const conversationsSlice = createSlice({
       ) {
         state.currentConversation.messages.push(message);
       }
-      state.conversations = sortConversations(state.conversations);
+      state.conversations = JSON.parse(
+        JSON.stringify(sortConversations(state.conversations))
+      );
     },
   },
   extraReducers: (builder) => {

@@ -64,7 +64,7 @@ export interface SupabaseUser {
   username: string;
   created_at: string;
 }
-interface SupabaseMessage {
+export interface SupabaseMessage {
   id: string;
   conversation_id: string;
   users: {

@@ -146,10 +146,12 @@ export default function SendButton(props: SendButtonProps) {
                   setIsTyping
                 );
                 if (message) {
-                  dispatch(sendMessage(message));
-                  if (!hasUnreadMessages) {
-                    dispatch(markConversationAsRead(thisConversation));
-                  }
+                  addNewMessage(message).then((res) => {
+                    dispatch(sendMessage(message));
+                    if (!hasUnreadMessages) {
+                      dispatch(markConversationAsRead(thisConversation));
+                    }
+                  });
                 }
               }
             }}
