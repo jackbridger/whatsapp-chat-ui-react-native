@@ -148,7 +148,6 @@ export default function SendButton(props: SendButtonProps) {
                 if (message) {
                   dispatch(sendMessage(message));
                   if (!hasUnreadMessages) {
-                    console.log("dispatching markConversationAsRead");
                     dispatch(markConversationAsRead(thisConversation));
                   }
                 }

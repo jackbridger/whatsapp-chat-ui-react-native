@@ -26,6 +26,9 @@ export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
   const currentUser = useSelector(
     (state: RootState) => state.users.currentUser
   );
+  const conversations = useSelector(
+    (state: RootState) => state.conversations.conversations
+  );
   useEffect(() => {
     if (!currentUser) {
       setShowUserDialog(true);
@@ -37,10 +40,6 @@ export default function ChatsScreen({}: RootTabScreenProps<"Chats">) {
         }
       });
   }, []);
-
-  const conversations = useSelector(
-    (state: RootState) => state.conversations.conversations
-  );
 
   const renderConversationPreview = (props: ConversationItemProps) => {
     const { item } = props;

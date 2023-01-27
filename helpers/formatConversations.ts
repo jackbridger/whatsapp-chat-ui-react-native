@@ -1,9 +1,9 @@
-import { Conversation, NickConversation, Message } from "../types";
+import { Conversation, SupabaseConversation, Message } from "../types";
 
 const randomIntBetweenOneAndFour = Math.floor(Math.random() * 5);
 
 export default function formatConversations(
-  conversationsResponse: NickConversation[]
+  conversationsResponse: SupabaseConversation[]
 ): Conversation[] {
   const conversations: Conversation[] = conversationsResponse.map((conv) => {
     const messages = conv.messages

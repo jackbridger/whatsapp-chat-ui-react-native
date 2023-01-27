@@ -59,12 +59,12 @@ export interface User {
   username: string;
   createdAt: string;
 }
-export interface NickUser {
+export interface SupabaseUser {
   id: string;
   username: string;
   created_at: string;
 }
-interface NickMessage {
+interface SupabaseMessage {
   id: string;
   conversation_id: string;
   users: {
@@ -74,10 +74,16 @@ interface NickMessage {
   message: string;
   created_at: string;
 }
-export interface NickConversation {
+export interface SupabaseConversation {
   id: string;
   name: string;
-  messages: NickMessage[];
+  messages: SupabaseMessage[];
   owner_user_id: string;
   created_at: string;
+}
+
+export interface MyResponse {
+  data: Conversation[] | null;
+  status: number;
+  message: string;
 }

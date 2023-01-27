@@ -1,5 +1,5 @@
 import ngrokURL from "../constants/ngrokURL";
-import { NickUser, User } from "../types";
+import { SupabaseUser, User } from "../types";
 
 export default async function createUser(username: string): Promise<User> {
   const baseURL = ngrokURL;
@@ -19,7 +19,7 @@ export default async function createUser(username: string): Promise<User> {
   };
   try {
     const res = await fetch(createUserURL, requestOptions);
-    const resjson: NickUser = await res.json();
+    const resjson: SupabaseUser = await res.json();
     const newUser: User = {
       id: resjson.id,
       username: resjson.username,

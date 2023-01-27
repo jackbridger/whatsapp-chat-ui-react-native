@@ -1,4 +1,4 @@
-import { Conversation, Message } from "../types";
+import { MyResponse } from "../types";
 import formatConversations from "../helpers/formatConversations";
 import ngrokURL from "../constants/ngrokURL";
 
@@ -6,30 +6,6 @@ const requestOptions: RequestInit = {
   method: "GET",
   redirect: "follow",
 };
-interface NickConversation {
-  id: string;
-  name: string;
-  messages: NickMessage[];
-  owner_user_id: string;
-  created_at: string;
-}
-
-interface NickMessage {
-  id: string;
-  conversation_id: string;
-  users: {
-    id: string;
-    username: string;
-  };
-  message: string;
-  created_at: string;
-}
-
-interface MyResponse {
-  data: Conversation[] | null;
-  status: number;
-  message: string;
-}
 
 const baseURL = ngrokURL;
 
