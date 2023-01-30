@@ -13,7 +13,8 @@ declare global {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  Chat: { conversation: ConversationType };
+  Chat: { conversation: Conversation };
+  CreateNewChat: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -31,34 +32,60 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
     NativeStackScreenProps<RootStackParamList>
   >;
 
-export type ConversationType = {
+export interface Conversation {
   id: string;
-  messages: MessageType[];
-  users: number[];
-  title: string;
-};
-
-export type MessageType = {
-  text: string;
-  time: Date;
-  userID: number;
-  id: string;
-};
-
-export interface MessageDataType {
-  message: MessageType;
+  messages: Message[];
+  users: string[];
+  name: string;
+  createdAt: string;
+  randomProfilePicture: number;
+  participants: User[];
 }
 
-export type ConversationsContextType = {
-  conversations: ConversationType[];
-  sendMessage: (
-    message: string,
-    conversationID: string,
-    userID: number,
-    setNewMsg: (msg: string) => void,
-    isTyping: boolean,
-    setIsTyping: (isTyping: boolean) => void
-  ) => void;
-  getCurrentConversation: () => ConversationType;
-  setCurrentConversation: (id: string) => void;
-};
+export interface Message {
+  id: string;
+  message: string;
+  time: string;
+  userID: string;
+  conversationID: string;
+  isRead: boolean;
+}
+
+export interface MessageData {
+  message: Message;
+}
+
+export interface User {
+  id: string;
+  username: string;
+  createdAt: string;
+}
+export interface SupabaseUser {
+  id: string;
+  username: string;
+  created_at: string;
+}
+export interface SupabaseMessage {
+  id: string;
+  conversation_id: string;
+  users: {
+    id: string;
+    username: string;
+  };
+  message: string;
+  created_at: string;
+}
+export interface SupabaseConversation {
+  id: string;
+  name: string;
+  messages: SupabaseMessage[];
+  owner_user_id: string;
+  created_at: string;
+  participants: SupabaseUser[];
+}
+
+export interface MyResponse {
+  data: Conversation[] | null;
+  status: number;
+  message: string;
+}

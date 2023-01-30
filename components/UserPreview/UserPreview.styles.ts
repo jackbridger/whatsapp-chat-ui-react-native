@@ -18,19 +18,22 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   profileImg: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
-    marginLeft: 10,
+    width: 40,
+    height: 40,
+    marginRight: 14,
     borderRadius: 50,
   },
   msgTitle: {
     fontWeight: "bold",
+    fontSize: 18,
     color: Colors.light.offBlack,
+  },
+  msgSubTitle: {
+    color: Colors.light.grey,
   },
   msgPreview: {
     color: Colors.light.offBlack,
-    width: "75%",
+    width: "80%",
   },
   msgDataContainer: {
     flexDirection: "row",
@@ -40,7 +43,9 @@ export default StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
   },
-
+  timeText: {
+    color: Colors.light.brightGreen,
+  },
   numberOfMsgsContainer: {
     backgroundColor: Colors.light.brightGreen,
     height: 20,

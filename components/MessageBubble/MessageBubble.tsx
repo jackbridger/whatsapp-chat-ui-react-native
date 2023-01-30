@@ -1,42 +1,48 @@
 import { View, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import dayjs from "dayjs";
+import { useSelector } from "react-redux";
 
-import { MessageDataType } from "../../types";
+import { MessageData } from "../../types";
 import styles from "./MessageBubble.styles";
+import { RootState } from "../../redux/store";
 
-export default function MessageBubble(props: MessageDataType) {
+export default function MessageBubble(props: MessageData) {
+  const currentUser = useSelector(
+    (state: RootState) => state.users.currentUser
+  );
   const { message } = props;
-  const isMyMessage = message.userID === 1;
+
+  const isMyMessage = message.userID === currentUser?.id;
   const isMessageRead = false;
   return (
     <View
       style={{
         ...styles.messageContainer,
-        alignSelf: isMyMessage ? "flex-start" : "flex-end",
-        backgroundColor: isMyMessage ? "#fcfcfc" : "#dfffc7",
-        borderTopLeftRadius: isMyMessage ? 0 : 5,
-        borderTopRightRadius: isMyMessage ? 5 : 0,
+        alignSelf: isMyMessage ? "flex-end" : "flex-start",
+        backgroundColor: isMyMessage ? "#dfffc7" : "#fcfcfc",
+        borderTopLeftRadius: isMyMessage ? 5 : 0,
+        borderTopRightRadius: isMyMessage ? 0 : 5,
       }}
     >
       <View
         style={{
           ...styles.leftMessageArrow,
-          display: isMyMessage ? "flex" : "none",
+          display: isMyMessage ? "none" : "flex",
         }}
       ></View>
       <Text
         style={{
           ...styles.messageText,
-          left: isMyMessage ? 0 : 10,
+          left: isMyMessage ? 10 : 0,
         }}
       >
-        {message.text}
+        {message.message}
       </Text>
       <View
         style={{
           ...styles.timeAndReadContainer,
-          left: isMyMessage ? 0 : 10,
+          left: isMyMessage ? 10 : 0,
         }}
       >
         <Text style={styles.timeText}>
@@ -52,7 +58,7 @@ export default function MessageBubble(props: MessageDataType) {
         <View
           style={{
             ...styles.rightMsgArrow,
-            display: isMyMessage ? "none" : "flex",
+            display: isMyMessage ? "flex" : "none",
           }}
         ></View>
       </View>

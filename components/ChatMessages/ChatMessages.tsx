@@ -2,7 +2,7 @@ import { View, Dimensions } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
 
-import { MessageType } from "../../types";
+import { Message } from "../../types";
 import useKeyboardOffsetHeight from "../../helpers/useKeyboardOffsetHeight";
 import getMessageHeightOffset from "../../helpers/getMessageBoxHeightOffset";
 import MessageBubble from "../MessageBubble/MessageBubble";
@@ -10,11 +10,11 @@ import MessageBubble from "../MessageBubble/MessageBubble";
 const windowHeight = Dimensions.get("window").height;
 
 interface MessageBubbleProps {
-  item: MessageType;
+  item: Message;
 }
 interface ChatMessagesProps {
   heightOfMessageBox: number;
-  messages: MessageType[];
+  messages: Message[];
 }
 
 export default function ChatMessages(props: ChatMessagesProps) {

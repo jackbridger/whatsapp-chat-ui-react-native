@@ -5,7 +5,6 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ParamListBase } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
-import { ConversationState } from "../redux/conversationsReducer";
 import images from "../assets/index";
 import type { RootState } from "../redux/store";
 
@@ -15,17 +14,8 @@ interface Props {
   navigation: NativeStackNavigationProp<ParamListBase, string, undefined>;
 }
 
-export default function ChatHeader(props: Props) {
-  const currentConversation = useSelector(
-    (state: RootState) => state.conversations.currentConversation
-  );
-  const id = currentConversation && currentConversation.id;
-  const name = currentConversation && currentConversation.name;
-  const randomProfilePic =
-    currentConversation && currentConversation.randomProfilePicture;
+export default function CreateChatHeader(props: Props) {
   const { navigation } = props;
-
-  const profileImg = images[randomProfilePic ? randomProfilePic : 0];
 
   return (
     <View
@@ -55,35 +45,26 @@ export default function ChatHeader(props: Props) {
             <Ionicons name="arrow-back" size={32} color={Colors.light.white} />
           )}
         </Pressable>
-        <Image
-          style={{
-            width: 40,
-            height: 40,
-            marginRight: 10,
-            borderRadius: 50,
-          }}
-          source={profileImg}
-        />
         <Text
           style={{
+            paddingLeft: 40,
             color: Colors.light.white,
             fontSize: 20,
             fontWeight: "600",
           }}
         >
-          {name}
+          Select contact
         </Text>
       </View>
       <View
         style={{
-          width: 120,
+          width: 60,
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
-        <FontAwesome name="video-camera" size={24} color={Colors.light.white} />
-        <FontAwesome name="phone" size={24} color={Colors.light.white} />
+        <FontAwesome name="search" size={24} color={Colors.light.white} />
         <Entypo
           name="dots-three-vertical"
           size={24}
