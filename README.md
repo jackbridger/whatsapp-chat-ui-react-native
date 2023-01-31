@@ -17,4 +17,8 @@ $ yarn install
 $ yarn ios
 ```
 
-There is [an article for this project on Dev.to](https://dev.to/jacksbridger/whatsapp-ui-in-react-native-part-1-4nbm)
+There are three articles for this project:
+
+1. [Part one](https://dev.to/jacksbridger/whatsapp-ui-in-react-native-part-1-4nbm) - WhatsApp UI
+2. [Part two](https://dev.to/nsmet/chat-backend-with-supabase-socketio-55nn) - setting up Supabase backend
+3. [Part three]() - Connecting UI with Supabase backend
