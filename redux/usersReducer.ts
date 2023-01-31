@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
 import storage from "@react-native-async-storage/async-storage";
 
-import { User, SupabaseUser } from "../types";
+import { User } from "../types";
 
 export interface UserState {
   currentUser: User | null;
