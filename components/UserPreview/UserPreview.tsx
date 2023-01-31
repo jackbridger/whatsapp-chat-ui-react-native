@@ -33,7 +33,8 @@ export default function UserPreview(props: UserPreviewProps) {
 
   const _onPress = () => {
     if (currentUser) {
-      createConversation([user.id, currentUser.id], user.username, user.id)
+      const newGroupName = `${user.username} & ${currentUser.username}`;
+      createConversation([user.id, currentUser.id], newGroupName, user.id)
         .then((conversation) => {
           const formattedConversation = formatConversation(conversation);
 
