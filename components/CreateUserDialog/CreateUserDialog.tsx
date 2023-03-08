@@ -3,9 +3,9 @@ import Dialog from "react-native-dialog";
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../../redux/usersReducer";
+import { setCurrentUser,setToken } from "../../redux/usersReducer";
 import { User } from "../../types";
-import createUser from "../../api/createUser";
+import createToken from "../../api/createToken";
 
 export default function CreateUserDialog({
   visible,
@@ -18,7 +18,14 @@ export default function CreateUserDialog({
   const [username, setUsername] = useState<string>("");
 
   const _createUser = async () => {
-    const user: User = await createUser(username);
+    const token: string = await createToken(username);
+    console.log("token ",token)
+    const user:User = {
+      id:username,
+      username:username,
+      createdAt: new Date().toDateString() // need to update
+    }
+    dispatch(setToken(token));
     dispatch(setCurrentUser(user));
     setShowUserDialog(false);
   };

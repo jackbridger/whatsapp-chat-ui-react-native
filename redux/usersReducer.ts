@@ -8,11 +8,13 @@ import { User } from "../types";
 export interface UserState {
   currentUser: User | null;
   users: User[];
+  token:string | null;
 }
 
 const initialState: UserState = {
   users: [],
   currentUser: null,
+  token:null
 };
 
 export const usersSlice = createSlice({
@@ -25,6 +27,9 @@ export const usersSlice = createSlice({
     setCurrentUser: (state: UserState, action: PayloadAction<User>): void => {
       state.currentUser = action.payload;
     },
+    setToken: (state: UserState, action: PayloadAction<string>): void => {
+      state.token = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(PURGE, (state) => {
@@ -34,6 +39,6 @@ export const usersSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addAllUsers, setCurrentUser } = usersSlice.actions;
+export const { addAllUsers, setCurrentUser,setToken } = usersSlice.actions;
 
 export default usersSlice.reducer;

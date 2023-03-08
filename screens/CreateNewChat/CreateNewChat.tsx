@@ -24,7 +24,7 @@ export default function CreateNewChat() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (currentUser) {
-      getAllUsers(currentUser.id).then((users) => {
+      getAllUsers().then((users) => {
         dispatch(addAllUsers(users));
       });
     }

@@ -23,3 +23,5 @@ export default async function addNewMessage(message: Message) {
   const res1 = response.json();
   return res1;
 }
+
+// use /messages and pass in the channel_id and message

@@ -1,26 +1,19 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 import { MyResponse } from "../types";
 import formatConversations from "../helpers/formatConversations";
 import ngrokURL from "../constants/ngrokURL";
 
-const requestOptions: RequestInit = {
-  method: "GET",
-  redirect: "follow",
-};
-
-const baseURL = ngrokURL;
 
 export default async function getAllConversations(
   userID: string
 ): Promise<MyResponse> {
   try {
-    const getconversationsURL: string = `${baseURL}/conversations?user_id=${userID}`;
-    const response = await fetch(getconversationsURL, requestOptions);
-    const result_1 = await response.json();
-    const formattedConversations = formatConversations(result_1);
+    const channels = await getAllChannels()
     return {
-      data: formattedConversations,
-      status: response.status,
-      message: response.statusText,
+      data: channels,
+      status: 200,
+      message: "success",
     };
   } catch (error) {
     let message;
@@ -31,5 +24,32 @@ export default async function getAllConversations(
       status: 400,
       message,
     };
+  }
+}
+
+
+const getAllChannels = async () => {
+  const token = useSelector((state: RootState) => state.users.token);
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${token}`);
+
+  var requestOptions:RequestInit = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  try {
+    const res = await fetch("http://api.supersimplechat.com/channels/", requestOptions)
+    const json:    {
+      id:string,
+      name:string,
+      owner_user_id:string,
+      created_at:string
+      updated_at:string
+  }[] = await res.json()
+    return json
+  }catch(err){
+    console.log(err);
+    return []
   }
 }

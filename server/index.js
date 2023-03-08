@@ -1,4 +1,3 @@
-import express from 'express'
 import fetch,{Headers} from 'node-fetch'
 const app = express()
 
@@ -8,13 +7,11 @@ const APP_ID = "0338dae0-0b2a-4582-8244-292aef3996d0"
 
 app.use(express.json()) 
 
-app.get('/user-token', async (req, res) => {
+app.post('/user-token', async (req, res) => {
     const userID = req.body.user_id
-    console.log({userID})
+    console.log("User id ",userID)
     
-    const token = await getToken()
-
-    console.log(token)
+    const token = await getToken(userID)
     res.send(token)
 })
 
@@ -41,9 +38,11 @@ const getToken = async (userID) => {
 
     // turn the below fetch into try await
   try {
-      const res = await fetch("localhost:3001/users/token", requestOptions)
-      const json = await res.json()
-      return json
+      const res = await fetch("http://localhost:3001/users/token", requestOptions)
+      console.log(res)
+      const token = await res.text()
+      console.log(token)
+      return token
   } catch(err){
       console.log(err)
       return err

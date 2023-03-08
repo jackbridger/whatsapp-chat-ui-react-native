@@ -33,3 +33,7 @@ export default async function createConversation(
     console.log(err);
   }
 }
+
+
+// This one is quite straightforward.
+// participant ids is passed but we don't need the owner id
